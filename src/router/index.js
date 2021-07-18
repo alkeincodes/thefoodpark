@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import { addGuardstoRoutes, addAdminGuardToRoutes } from './guards'
 // import store from '@/store'
-import auth from '@/modules/Auth/auth.routes'
+import cashier from '@/modules/Cashier/cashier.routes'
 
 Vue.use(VueRouter)
 
@@ -10,7 +10,7 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
-    ...auth,
+    ...cashier,
     ...addGuardstoRoutes([]),
     ...addAdminGuardToRoutes([]),
     {

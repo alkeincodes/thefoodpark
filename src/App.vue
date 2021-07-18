@@ -1,9 +1,7 @@
 <template>
   <div id="app">
-    <div class="user-container">
-      <div class="main-content">
-        <router-view></router-view>
-      </div>
+    <div class="main-container">
+      <router-view></router-view>
     </div>
   </div>
 </template>

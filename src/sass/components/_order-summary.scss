@@ -1,0 +1,25 @@
+.order-summary {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  height:100%;
+
+  &__top {
+    width: 100%;
+  }
+  &__bottom {
+    width: 100%;
+  }
+  &-cta,
+  &-overall {
+    @include flexbox(row, center, space-between);
+    padding-inline: $padding * 4;
+
+    button {
+      width: 150px;
+    }
+  }
+
+  &-overall {
+    margin-bottom: $margin * 2;
+  }
+}

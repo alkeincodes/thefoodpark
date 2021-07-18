@@ -1,0 +1,14 @@
+.item-qty {
+  input {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    border: none;
+    font-size: 70px;
+    font-weight: bold;
+    font-family: 'Quicksand', sans-serif;
+  }
+  input[readonly=readonly] {
+    border: none;
+  }
+}

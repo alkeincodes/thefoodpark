@@ -1,0 +1,9 @@
+.site-header {
+  padding: $padding;
+  height: 50px;
+  position: fixed;
+  background-color: #fff;
+  box-shadow: $box-shadow;
+  width: 100%;
+  z-index: 80;
+}

@@ -1,0 +1,8 @@
+#selected-menu-modal {
+  .selected-menu-item {
+    text-align: center;
+    &__title {
+      font-size: $font-lg;
+    }
+  }
+}
