@@ -1,7 +1,7 @@
 <template>
-  <div class="site-header">
+  <header class="site-header">
     <h2>Project Name</h2>
-  </div>
+  </header>
 </template>
 
 <script>
