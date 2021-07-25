@@ -3,6 +3,10 @@
   height: 100vh;
 }
 
+.main-padding {
+  padding-top: 70px;
+  padding-inline: $padding * 2;
+}
 
 .order-page {
   display: grid;

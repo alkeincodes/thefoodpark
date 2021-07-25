@@ -20,7 +20,15 @@
         >
         <div class="product-menu__info">
           <h3>{{ item.name }}</h3>
-          <p>{{ item.price }}</p>
+          <p>
+            <vue-numeric
+              :value="item.price"
+              currency="₱"
+              separator=","
+              :precision="2"
+              read-only
+            />
+          </p>
         </div>
       </div>
     </div>
@@ -28,6 +36,8 @@
 </template>
 
 <script>
+import VueNumeric from 'vue-numeric'
+
 export default {
   name: 'CategorizeProducts',
   props: {
@@ -35,6 +45,7 @@ export default {
       type: Object,
       default: () => {}
     }
-  }
+  },
+  components: { VueNumeric }
 }
 </script>

@@ -4,25 +4,40 @@
       <h3 class="mb-4">Order Summary</h3>
       <el-table
         :data="orders"
-        style="width: 100%">
+        style="width: 100%"
+      >
         <el-table-column
           prop="name"
           label="Name"
         >
         </el-table-column>
-        <el-table-column
-          prop="price"
-          label="Price"
-        >
+        <el-table-column label="Price">
+          <template slot-scope="scope">
+            <vue-numeric
+              v-model="scope.row.price"
+              currency="₱"
+              separator=","
+              :precision="2"
+              read-only
+            />
+          </template>
         </el-table-column>
         <el-table-column
           prop="quantity"
           label="Quantity"
+          align="center"
         >
         </el-table-column>
         <el-table-column label="Total">
           <template slot-scope="props">
-            {{ props.row.price * props.row.quantity }}
+            <!-- {{ props.row.price * props.row.quantity }} -->
+            <vue-numeric
+              :value="props.row.price * props.row.quantity"
+              currency="₱"
+              separator=","
+              :precision="2"
+              read-only
+            />
           </template>
         </el-table-column>
       </el-table>
@@ -42,8 +57,12 @@
 </template>
 
 <script>
+import VueNumeric from 'vue-numeric'
+import Order from '@/models/Order'
+
 export default {
   name: 'OrderSummary',
+  components: { VueNumeric },
   data () {
     return {
       orders: [
@@ -64,6 +83,9 @@ export default {
         }
       ]
     }
+  },
+  created () {
+    console.log(Order.all())
   }
 }
 </script>
