@@ -8,6 +8,78 @@ const state = {
   user: null,
   counter: 0,
   selectedMenu: {},
+  orderItems: [
+    {
+      id: 0,
+      order_number: '#0001',
+      total: 300,
+      status: 'preparing',
+      order_type: 'dine-in'
+    },
+    {
+      id: 1,
+      order_number: '#0002',
+      total: 424,
+      status: 'preparing',
+      order_type: 'dine-in'
+    },
+    {
+      id: 2,
+      order_number: '#0003',
+      total: 1256,
+      status: 'preparing',
+      order_type: 'takeout'
+    },
+    {
+      id: 3,
+      order_number: '#0004',
+      total: 3642,
+      status: 'preparing',
+      order_type: 'delivery'
+    },
+    {
+      id: 4,
+      order_number: '#0005',
+      total: 5623,
+      status: 'preparing',
+      order_type: 'delivery'
+    },
+    {
+      id: 5,
+      order_number: '#0006',
+      total: 2,
+      status: 'preparing',
+      order_type: 'dine-in'
+    },
+    {
+      id: 6,
+      order_number: '#0007',
+      total: 2,
+      status: 'preparing',
+      order_type: 'dine-in'
+    },
+    {
+      id: 7,
+      order_number: '#0008',
+      total: 2,
+      status: 'preparing',
+      order_type: 'dine-in'
+    },
+    {
+      id: 8,
+      order_number: '#0009',
+      total: 2,
+      status: 'preparing',
+      order_type: 'dine-in'
+    },
+    {
+      id: 9,
+      order_number: '#0010',
+      total: 2,
+      status: 'preparing',
+      order_type: 'dine-in'
+    }
+  ],
   foodMenu: [
     {
       categoryName: 'Category',
@@ -121,6 +193,10 @@ const mutations = {
   },
   SET_SELECTED_MENU (state, payload) {
     state.selectedMenu = payload
+  },
+  SET_ORDER_STATUS (state, payload) {
+    const index = state.orderItems.findIndex(i => i.id === payload.id)
+    state.orderItems[index].status = payload.status
   }
 }
 
@@ -168,7 +244,8 @@ const getters = {
   authenticated: state => state.authenticated,
   user: state => state.user,
   selectedMenu: state => state.selectedMenu,
-  foodMenu: state => state.foodMenu
+  foodMenu: state => state.foodMenu,
+  orderItems: state => state.orderItems
 }
 
 export default {

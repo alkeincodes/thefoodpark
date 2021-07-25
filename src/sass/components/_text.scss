@@ -1,0 +1,18 @@
+.text {
+  &--success {
+    color: $success;
+  }
+  &--danger {
+    color: $danger;
+  }
+  &--warning {
+    color: $warning;
+  }
+  &--primary {
+    color: $primary;
+  }
+}
+
+.delivery-status {
+  text-transform: capitalize;
+}

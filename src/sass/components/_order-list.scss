@@ -1,0 +1,10 @@
+.order-list {
+  @include flexbox(row, center, initial);
+  overflow: hidden;
+  overflow-x: auto;
+  padding-block: $padding;
+  padding-right: 150px;
+  position: relative;
+  height: 60px;
+  @include horizontalScroll;
+}

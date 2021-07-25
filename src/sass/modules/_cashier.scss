@@ -1,0 +1,14 @@
+.cashier {
+  .search-box {
+    width: 370px;
+  }
+}
+
+
+@media screen and (max-width: 425px) {
+  .cashier {
+    .search-box {
+      width: 100%;
+    }
+  }
+}

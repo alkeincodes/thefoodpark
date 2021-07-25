@@ -3,9 +3,26 @@
   height: 100vh;
 }
 
+.site-title {
+  font-size: $font-xl - 2;
+  font-weight: bold;
+  margin-bottom: $margin * 2;
+}
+
+.txt-hint {
+  color: #909399;
+  font-size: $font-sm;
+}
+
+.component-padding-top {
+  margin-top: 100px;
+}
+
 .main-padding {
-  padding-top: 70px;
-  padding-inline: $padding * 2;
+  padding-block: 70px;
+  // padding-inline: $padding * 2;
+  padding-left: $sidenav-width + $padding * 2;
+  padding-right: $padding * 2;
 }
 
 .order-page {
@@ -35,5 +52,18 @@
     z-index: 100;
     background-color: #fff;
     padding: $padding * 2;
+  }
+}
+
+.scroll-fader {
+  min-width: 200px;
+  background-image: linear-gradient(to right, hsla(0, 0%, 100%, 0) , $bg-color);
+  position: sticky;
+  right: -150px;
+}
+
+@media screen and (max-width: 768px) {
+  .main-padding {
+    padding-left: $sidenav-collapse-width + $padding * 2;
   }
 }

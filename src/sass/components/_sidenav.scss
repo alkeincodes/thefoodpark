@@ -1,0 +1,142 @@
+.sidenav {
+  position: fixed;
+  width: $sidenav-width;
+  height: 100vh;
+  background-color: #fff;
+  padding-block: $header-height + $padding;
+  padding-inline: $padding * 2;
+  z-index: 50;
+
+  &__logo {
+    text-align: center;
+    img {
+      border-radius: 50%;
+    }
+  }
+
+  &__link {
+    li {
+      list-style-type: none;
+      font-size: $font-md;
+      a {
+        @include flexbox(row, center, initial);
+        text-decoration: none;
+        padding: $padding * 1.5 $padding * 2;
+        border-radius: $border-radius;
+        color: $link-color;
+
+        svg {
+          margin-right: $margin * 2;
+        }
+
+        &.active {
+          background-color: $primary-light;
+          font-weight: 500;
+          color: $primary;
+
+          svg {
+            path {
+              fill: #409eff !important;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .nav-logout {
+      @include flexbox(row, center, initial);
+      text-decoration: none;
+      padding: $padding * 1.5 $padding * 2;
+      border-radius: $border-radius;
+      color: $danger;
+      position: absolute;
+      bottom: $margin;
+      font-weight: 500;
+
+      svg {
+        margin-right: $margin * 2;
+      }
+  }
+}
+
+
+@media screen and (max-width: 768px) {
+  .sidenav {
+    width: $sidenav-collapse-width;
+    padding: 0;
+
+    span {
+      display: none;
+    }
+
+    &__logo {
+      img {
+        width: 50px;
+        margin-top: 65px;
+      }
+    }
+
+    &__link {
+      li {
+        a {
+          justify-content: center;
+          svg {
+            margin-right: 0;
+          }
+          &.active {
+            border-radius: 0;
+          }
+        }
+      }
+    }
+
+    .nav-logout {
+      justify-content: center;
+      width: 100%;
+      svg {
+        margin-right: 0;
+      }
+    }
+
+    &.open {
+      width: $sidenav-width !important;
+      padding-inline: 16px !important;
+      box-shadow: 3px -1px 20px 0 #d2d2d2;
+
+      span {
+        display: block;
+      }
+
+      .nav-logout {
+        justify-content: initial;
+        svg {
+          margin-right: $margin * 2;
+        }
+      }
+
+      .sidenav {
+        &__logo {
+          img {
+            width: 150px;
+            margin-top: 65px;
+          }
+        }
+        &__link {
+          li {
+            a {
+              justify-content: initial;
+              padding: $padding * 1.5 $padding * 2;
+              svg {
+                margin-right: $margin * 2;
+              }
+              &.active {
+                border-radius: $border-radius;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

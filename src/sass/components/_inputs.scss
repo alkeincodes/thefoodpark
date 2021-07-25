@@ -12,3 +12,10 @@
     border: none;
   }
 }
+
+.el-input {
+  &__inner {
+    border: none;
+    font-family: 'Quicksand', sans-serif;
+  }
+}

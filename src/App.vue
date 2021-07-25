@@ -2,6 +2,7 @@
   <div id="app">
     <div class="main-container">
       <app-header />
+      <sidenav />
       <router-view></router-view>
     </div>
   </div>
@@ -9,10 +10,14 @@
 
 <script>
 import AppHeader from '@/components/common/App/AppHeader'
+import Sidenav from '@/components/common/App/Sidenav'
 
 export default {
   name: 'App',
-  components: { AppHeader }
+  components: {
+    AppHeader,
+    Sidenav
+  }
 }
 </script>
 

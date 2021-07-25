@@ -1,0 +1,1029 @@
+.filter-container {
+  @include flexbox(row, center, initial);
+}
+
+.list-cta {
+  & > div {
+    &:nth-child(2) {
+      text-align: right !important;
+    }
+  }
+}
+
+.staff-devices {
+  .filter-container {
+    .el-input {
+      max-width: 300px;
+    }
+
+    .filter-item {
+      margin-bottom: 0;
+    }
+
+    .filter-primary {
+      @include flexbox(row, center, space-between);
+      margin-left: $margin * 2;
+      width: 100%;
+    }
+  }
+}
+
+.filter {
+  @include flexbox(row, center, initial);
+  .d-flex {
+    @include flexbox(row, center, initial);
+  }
+  // MODS
+  &--1-col {
+    .col-1 {
+      @include flexbox(row, center, initial);
+      width: 50%;
+
+      .el-input {
+        max-width: 350px;
+        width: 100%;
+        margin-right: $margin;
+      }
+      .el-select {
+        margin-right: $margin;
+      }
+    }
+  }
+  &--2-col {
+    @include flexbox(row, center, initial);
+    .col-1 {
+      @include flexbox(row, center, initial);
+      width: 50%;
+      .el-select,
+      .el-input {
+        margin-right: $margin;
+      }
+    }
+  }
+  &--3-col {
+    & > div {
+      // flex: 1;
+    }
+    & > div:not(:last-child) {
+      margin-right: $margin;
+    }
+
+    .col-1 {
+      @include flexbox(row, center, initial);
+
+      .el-select {
+        margin-right: $margin;
+      }
+    }
+
+    .col-2 {
+      .el-date-editor {
+        width: 100% !important;
+      }
+
+      .el-select {
+        margin-right: $margin;
+      }
+    }
+
+    .col-3 {
+      @include flexbox(row, center, initial);
+
+      .el-button {
+        margin-right: $margin;
+      }
+    }
+  }
+}
+
+.room-services {
+  .filter-container {
+    .filter-item {
+      margin-bottom: 0;
+    }
+    & > div {
+      &:not(:last-child) {
+        margin-right: $margin;
+      }
+      &.el-inputs {
+        @include flexbox(row, center, initial);
+
+        .el-select {
+          margin-right: $margin;
+        }
+      }
+    }
+  }
+
+  .filter-controls {
+    margin-bottom: $margin;
+  }
+}
+
+.lnf-list {
+  .filter-container {
+    & > div {
+      &:not(:last-child) {
+        margin-right: $margin;
+      }
+    }
+
+    .el-inputs {
+      @include flexbox(row, center, initial);
+      .el-input {
+        margin-right: $margin;
+        max-width: 300px;
+      }
+    }
+  }
+}
+
+.fnb-menus {
+  .filter-container {
+    .el-inputs {
+      &:not(:last-child) {
+        margin-right: $margin;
+      }
+    }
+    .el-buttons {
+      .el-button + .el-button {
+        margin-left: 0 !important;
+      }
+    }
+  }
+}
+
+.luggages-list,
+.guest-packages-list,
+.activities-list {
+  .filter-container {
+    @include flexbox(row, center, initial);
+
+    .input-only {
+      margin-right: $margin;
+    }
+
+    .filter-item {
+      margin-bottom: 0;
+    }
+
+    .el-inputs {
+      @include flexbox(row, center, initial);
+      margin-right: $margin;
+
+      & > div {
+        width: 50%;
+        &:not(:last-child) {
+          margin-right: $margin;
+        }
+      }
+    }
+
+    .el-datepickers {
+      margin-right: $margin;
+      & > div {
+        width: unset !important;
+        max-width: 350px;
+      }
+    }
+  }
+}
+
+.comp-option {
+  .filter-container {
+    @include flexbox(row, center, space-between);
+
+    & > div {
+      width: 50%;
+      @include flexbox(row, center, initial);
+
+      .el-input {
+        margin-right: $margin;
+      }
+
+      &.el-buttons {
+        justify-content: flex-end;
+      }
+    }
+  }
+}
+
+.areas-list {
+  .filter-container {
+    @include flexbox(row, center, initial);
+    .el-input {
+      margin-right: $margin * 1.5;
+    }
+  }
+}
+
+.events-list {
+  .filter-container {
+    .el-inputs {
+      @include flexbox(row, center, initial);
+
+      .el-input {
+        margin-right: $margin;
+      }
+    }
+  }
+}
+
+.table-toolbar {
+  position: absolute;
+  bottom: 0;
+  background-color: red;
+}
+
+.responsive-table {
+  table {
+    width: inherit !important;
+    .cell-name {
+      display: none;
+      font-weight: bold;
+    }
+
+    &.el-table__body {
+      table-layout: unset !important;
+    }
+  }
+}
+
+.restaurant-list {
+  .filter-container {
+    @include flexbox(row, center, initial);
+
+    & > div {
+      width: 50%;
+    }
+
+    .el-inputs {
+      @include flexbox(row, center, initial);
+      .el-input {
+        margin-right: $margin;
+      }
+    }
+    .el-buttons {
+      @include flexbox(row, center, flex-end);
+    }
+  }
+}
+
+// RWD
+@media screen and (max-width: 1024px) {
+  .filter {
+    &--3-col {
+      flex-direction: column;
+      align-items: initial;
+
+      & > div:not(:last-child) {
+        margin-bottom: $margin;
+      }
+    }
+
+    &.compact {
+      flex-direction: row !important;
+      & > div:not(:last-child) {
+        margin-bottom: 0 !important;
+      }
+    }
+  }
+  .staff-devices {
+    .filter-container {
+      .el-select {
+        margin-right: $margin;
+      }
+    }
+  }
+
+  .staff-devices-table {
+    &.responsive-table {
+      table {
+        thead {
+          display: none;
+        }
+        tbody {
+          .el-table__row {
+            display: flex;
+            // width: 896px;
+            flex-direction: column;
+
+            td {
+              .cell {
+                @include flexbox(row, center, space-between);
+
+                div {
+                  &:nth-child(1) {
+                    width: fit-content;
+                  }
+                  &:nth-child(2) {
+                    text-align: right;
+                    width: fit-content;
+                  }
+                }
+              }
+            }
+
+            .cell-name {
+              display: block;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .fnb-menus {
+    .filter-container {
+      .el-inputs {
+        @include flexbox(row, center, initial);
+        & > div {
+          width: 50% !important;
+          &:not(:last-child) {
+            margin-right: $margin;
+          }
+        }
+      }
+      .el-buttons {
+        text-align: right;
+        .filter-item {
+          margin-right: 0;
+          margin-left: 0;
+        }
+      }
+    }
+  }
+
+  .responsive-table {
+    &.block-type {
+      .el-col {
+        margin-bottom: $margin;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .filter {
+    &--1-col {
+      .col-1 {
+        width: 100%;
+      }
+    }
+
+    &.compact {
+      flex-direction: column !important;
+      & > div {
+        &:not(:last-child) {
+          margin-bottom: $margin !important;
+        }
+      }
+    }
+
+    &--2-col {
+      flex-direction: column;
+      align-items: flex-start;
+      .col-1 {
+        width: 100%;
+      }
+      .col-2 {
+        button {
+          margin-top: $margin;
+        }
+      }
+    }
+  }
+
+  .staff-devices {
+    .filter-container {
+      flex-direction: column;
+      align-items: initial;
+
+      .el-select, .filter-item {
+        margin-bottom: $margin;
+      }
+      input {
+        max-height: 300px;
+      }
+      .action-del {
+        margin-left: 0 !important;
+      }
+
+      .filter-primary {
+        // justify-content: initial;
+        margin-left: 0;
+        &__left {
+          margin-right: $margin * 2;
+        }
+      }
+    }
+  }
+  .smses-list {
+    .filter-container {
+      & > div {
+        width: 40%;
+      }
+      .el-input {
+        margin-right: $margin;
+      }
+    }
+  }
+
+  .room-services {
+    .filter-container {
+      flex-direction: column;
+      align-items: initial;
+      & > div {
+        &:not(:last-child) {
+          margin-bottom: $margin;
+          margin-right: 0;
+        }
+      }
+      .el-inputs {
+        margin-right: 0 !important;
+        .el-select {
+          margin-right: 0 !important;
+        }
+      }
+      .el-datepickers {
+        width: 100%;
+        & > div {
+          width: 100% !important;
+        }
+      }
+    }
+    .filter-controls {
+      @include flexbox(row, center, initial);
+      border-top: 1px solid #e2e2e2;
+      padding-top: $padding;
+
+      & > .el-button {
+        margin-left: 0 !important;
+        margin-right: $margin;
+      }
+    }
+  }
+
+  .fnb-menus {
+    .filter-container {
+      .el-inputs {
+        flex-direction: column;
+        align-items: initial;
+        & > div {
+          width: 100% !important;
+        }
+      }
+
+    }
+  }
+
+  .luggages-list,
+  .guest-packages-list {
+    .filter-container {
+      flex-direction: column;
+      align-items: initial;
+
+      .el-inputs,
+      .el-datepickers {
+        margin-right: 0;
+        margin-bottom: $margin;
+      }
+
+    }
+  }
+
+  .responsive-table {
+    table {
+      thead {
+        display: none;
+      }
+      tbody {
+        // display: inline-flex;
+        // width: 671px;
+
+        .el-table__row {
+          display: flex;
+          // width: 640px !important;
+          flex-direction: column;
+
+          td {
+            .cell {
+              @include flexbox(row, center, space-between);
+
+              div {
+                &:nth-child(1) {
+                  width: fit-content;
+                }
+                &:nth-child(2) {
+                  text-align: right;
+                  width: fit-content;
+                }
+              }
+            }
+          }
+
+          .cell-name {
+            display: block;
+          }
+        }
+      }
+    }
+
+    .staff-details {
+      @include flexbox(column, flex-end, flex-end);
+    }
+
+    &.block-type {
+      table tbody .el-table__row {
+        .cell-name, .cell-content {
+          width: 50% !important;
+
+          & > div {
+            width: 100% !important;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .filter {
+    &--1-col {
+      .col-1 {
+        flex-direction: column;
+        align-items: flex-start;
+
+        .el-button {
+          margin-top: $margin;
+        }
+      }
+    }
+
+    &.compact {
+      .col-2 {
+        flex-direction: column;
+        align-items: flex-start;
+
+        & > * {
+          &:not(:last-child) {
+            margin-bottom: $margin;
+          }
+        }
+      }
+    }
+
+    &--2-col {
+      .col-1 {
+        flex-direction: column;
+        align-items: flex-start;
+        & > * {
+          &:not(:last-child) {
+            margin-bottom: $margin;
+          }
+        }
+      }
+    }
+    &--3-col {
+      .col-1 {
+        &.dual-input {
+          flex-direction: column;
+          align-items: flex-start;
+
+          .el-select {
+            &:not(:last-child) {
+              margin-bottom: $margin;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .filter-primary {
+    flex-direction: column !important;
+    align-items: initial !important;
+  }
+
+  .filter.date-filter {
+    .el-inputs {
+      flex-direction: column;
+      .el-select {
+        margin-right: 0;
+        margin-bottom: $margin;
+      }
+    }
+  }
+
+  .smses-list {
+    .filter-container {
+      flex-direction: column;
+      align-items: initial;
+      & > div {
+        width: 100%;
+      }
+      .el-input {
+        margin-right: $margin;
+      }
+    }
+  }
+
+  .room-services {
+    .filter-container {
+      .el-inputs {
+        flex-direction: column !important;
+        .el-select {
+          margin-right: 0 !important;
+          // margin-bottom: $margin;
+        }
+      }
+    }
+
+    .filter-controls {
+      flex-direction: column;
+      align-items: initial;
+
+      & > .el-button {
+        margin-right: 0;
+        width: fit-content;
+        margin-bottom: $margin !important;
+      }
+    }
+  }
+
+  .luggages-list {
+    .filter-container {
+      .el-inputs {
+        flex-direction: column;
+        align-items: flex-start;
+        & > {
+          .el-select {
+            margin-bottom: $margin;
+          }
+          div {
+            width: 100% !important;
+          }
+        }
+      }
+    }
+  }
+
+  .lnf-list {
+    .filter-container {
+      flex-direction: column;
+      align-items: initial;
+    }
+  }
+
+  .fnb-menus {
+    padding: 0 !important;
+    .filter-container {
+      flex-direction: column;
+      align-items: initial;
+    }
+
+    .el-buttons {
+      text-align: left !important;
+    }
+  }
+
+  .comp-option {
+    .filter-container {
+      flex-direction: column;
+      align-items: initial;
+
+      & > div {
+        width: 100%;
+
+        & + div {
+          margin-top: $margin;
+        }
+
+        &.el-buttons {
+          justify-content: flex-start;
+        }
+      }
+    }
+  }
+
+  .areas-list {
+    .filter-container {
+      flex-direction: column;
+      align-items: initial;
+      .el-input {
+        margin-right: 0;
+        width: 100% !important;
+      }
+
+      .el-button {
+        margin-left: 0;
+        margin-bottom: $margin;
+      }
+    }
+  }
+
+  .magazine-list {
+    .responsive-table {
+      .cell-name {
+        width: 150px !important;
+      }
+    }
+  }
+
+  .activities-list {
+    .filter-container {
+      flex-direction: column;
+      align-items: flex-start;
+
+      .input-only {
+        width: 100%;
+        margin-bottom: $margin;
+      }
+      .el-inputs {
+        margin-bottom: $margin;
+      }
+    }
+  }
+
+  .events-list {
+    .filter-container {
+      .el-inputs {
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+
+        .el-input {
+          width: 100% !important;
+        }
+
+        .el-button {
+          margin-left: 0;
+          margin-top: $margin;
+        }
+      }
+    }
+  }
+
+  .restaurant-list {
+    .filter-container {
+      flex-direction: column;
+      align-items: flex-start;
+      & > div {
+        width: 100% !important;
+      }
+
+      .el-buttons {
+        justify-content: flex-start;
+        margin-top: $margin;
+      }
+    }
+  }
+
+  .responsive-table {
+    &.block-type {
+      table tbody {
+        .el-table {
+          &__row {
+            .cell-name, .cell-content {
+              width: 50% !important;
+            }
+          }
+          &__expanded-cell {
+            padding: $padding * 2 !important;
+
+            .table-btns {
+
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .list-cta {
+    & > div {
+      &:nth-child(2) {
+        text-align: left !important;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .action-del {
+    margin-bottom: $margin !important;
+  }
+
+  .cell-image {
+    text-align: left;
+
+    & > div {
+      text-align: left;
+    }
+  }
+
+  .responsive-table {
+    table {
+      tbody {
+        .el-table {
+            &__row {
+              td {
+                .cell {
+                  flex-direction: column !important;
+                  align-items: initial !important;
+
+                  .table-btns {
+                    text-align: left !important;
+                  }
+                }
+              }
+            }
+
+            &__expanded-cell {
+              padding: $padding * 2;
+            }
+          }
+        }
+    }
+
+    .staff-details {
+      align-items: flex-start !important;
+      margin-top: $margin;
+      font-size: 12px !important;
+    }
+
+    .avatar-details {
+      @include flexbox(column, flex-start, flex-start);
+
+      br {
+        display: none;
+      }
+    }
+
+    &.block-type {
+      table tbody .el-table__row {
+        .cell-name, .cell-content {
+          width: 100% !important;
+          text-align: left !important;
+        }
+      }
+    }
+  }
+
+
+  .filter {
+    &--3-col {
+      .col-2 {
+        margin-right: 0 !important;
+      }
+      .col-3 {
+        flex-direction: column;
+        align-items: initial;
+        .el-button {
+          margin-right: 0;
+          margin-bottom: $margin;
+          width: fit-content;
+        }
+
+        // .el-dropdown {
+        //   & > * {
+        //     width: 100%;
+        //   }
+        // }
+      }
+    }
+  }
+
+  .lnf-list {
+    .filter-container {
+      .el-inputs {
+        flex-direction: column;
+        align-items: initial;
+        margin-right: 0 !important;
+        .el-select {
+          width: 100% !important;
+        }
+        .el-input {
+          margin-right: 0 !important;
+        }
+      }
+    }
+  }
+
+  .activities-list {
+    .filter-container {
+      .el-inputs {
+        width: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+        & > div {
+          width: 100% !important;
+          &:not(:last-child) {
+            margin-bottom: $margin;
+          }
+        }
+      }
+
+      .el-buttons {
+        .el-button {
+          margin: 0;
+        }
+      }
+    }
+  }
+
+  .el-date-editor {
+    overflow: hidden;
+    .el-range-separator {
+      // opacity: 0;
+      &::before {
+        content: '-';
+        font-size: 2rem;
+        color: gray;
+      }
+    }
+  }
+
+  .fnb-menus {
+    .filter-container {
+      .el-buttons {
+        .filter-item {
+          margin-bottom: 0 !important;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 375px) {
+
+  .restaurant-list {
+    .filter-container {
+      flex-direction: column;
+      align-items: flex-start;
+
+      .el-inputs {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .el-buttons {
+        .el-button {
+          margin-left: 0;
+          margin-top: $margin;
+        }
+      }
+    }
+  }
+}
+
+
+@media screen and (max-width: 320px) {
+  .filter {
+    &--3-col {
+      & > div:first-child{
+        margin-right: 0 !important;
+      }
+    }
+    .el-radio-button--medium .el-radio-button__inner {
+      font-size: 12px !important;
+    }
+  }
+
+  .luggages-list,
+  .guest-packages-list {
+    .filter-container {
+      .el-inputs{
+        flex-direction: column;
+        align-items: initial;
+        & > div {
+          width: 100% !important;
+          &:not(:last-child) {
+            margin-bottom: $margin;
+          }
+        }
+      }
+    }
+    .filter-controls {
+
+      .el-button {
+        &:not(:last-child) {
+          margin-bottom: $margin;
+        }
+        & + .el-button {
+          margin-left: 0 !important;
+        }
+      }
+    }
+  }
+
+  .activities-list {
+    .el-buttons {
+      .el-button {
+        &:not(:last-child) {
+          margin-bottom: $margin;
+        }
+      }
+    }
+  }
+}

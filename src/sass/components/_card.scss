@@ -1,0 +1,36 @@
+.card {
+  border-radius: $border-radius;
+  background-color: #fff;
+  padding-top: $padding;
+
+  hr {
+    border-color: $border-color;
+    border-style: none inset inset inset;
+  }
+
+  &.order-card {
+    min-width: 200px;
+    text-align: center;
+    svg {
+      padding-block: $padding;
+    }
+
+    .price {
+      text-align: left;
+      padding: $padding $padding * 2;
+
+      .amount {
+        font-size: $font-md;
+      }
+    }
+
+    .card-cta {
+      @include flexbox(row, center, initial);
+      padding: $padding * 2;
+
+      button {
+        width: 50%;
+      }
+    }
+  }
+}

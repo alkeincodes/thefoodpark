@@ -1,0 +1,14 @@
+.queue-cards {
+  @include flexbox(row, center, initial);
+  overflow: hidden;
+  overflow-x: auto;
+  padding-block: $padding;
+  position: relative;
+  padding-right: 150px;
+
+  @include horizontalScroll;
+
+  .order-card {
+    margin-right: $padding * 4;
+  }
+}
