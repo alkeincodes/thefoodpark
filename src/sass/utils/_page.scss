@@ -62,6 +62,23 @@
   right: -150px;
 }
 
+
+.login {
+  @include flexbox(column, center, center);
+  height: 100vh;
+
+  .logo-container {
+    img {
+      width: 200px;
+    }
+    margin-bottom: $margin * 4;
+  }
+
+  .el-form {
+    width: 300px;
+  }
+}
+
 @media screen and (max-width: 768px) {
   .main-padding {
     padding-left: $sidenav-collapse-width + $padding * 2;

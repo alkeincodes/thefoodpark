@@ -28,6 +28,9 @@ export default {
     return {
       search: ''
     }
+  },
+  created () {
+
   }
 }
 </script>

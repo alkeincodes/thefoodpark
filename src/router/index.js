@@ -10,6 +10,11 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
+    {
+      path: '/',
+      name: 'Login',
+      component: () => import('@/modules/Login')
+    },
     ...cashier,
     ...addGuardstoRoutes([]),
     ...addAdminGuardToRoutes([]),

@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <div class="main-container">
-      <app-header />
-      <sidenav />
+      <app-header v-if="$route.name !== 'Login'" />
+      <sidenav v-if="$route.name !== 'Login'" />
       <router-view></router-view>
     </div>
   </div>
@@ -17,6 +17,9 @@ export default {
   components: {
     AppHeader,
     Sidenav
+  },
+  created () {
+    console.log('@VUE_APP_API_URL: ', process.env.VUE_APP_API_URL)
   }
 }
 </script>
