@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import { addGuardstoRoutes, addAdminGuardToRoutes } from './guards'
+import { addGuardstoRoutes, addAdminGuardToRoutes, addCashierGuardToRoutes } from './guards'
 // import store from '@/store'
 import cashier from '@/modules/Cashier/cashier.routes'
 
@@ -13,11 +13,13 @@ const router = new VueRouter({
     {
       path: '/',
       name: 'Login',
-      component: () => import('@/modules/Login')
+      component: () => import('@/modules/Auth/Login')
     },
-    ...cashier,
     ...addGuardstoRoutes([]),
     ...addAdminGuardToRoutes([]),
+    ...addCashierGuardToRoutes([
+      ...cashier
+    ]),
     {
       path: '*',
       component: require('@/components/common/404.vue').default

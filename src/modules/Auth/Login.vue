@@ -19,6 +19,7 @@
         <el-button type="primary" @click="submitForm('ruleForm')">Login</el-button>
       </el-form-item>
     </el-form>
+    <p class="text--danger">{{ error }}</p>
   </div>
 </template>
 
@@ -27,6 +28,7 @@ export default {
   name: 'Login',
   data () {
     return {
+      error: null,
       ruleForm: {
         email: '',
         password: ''
@@ -41,16 +43,25 @@ export default {
       }
     }
   },
+  watch: {
+    ruleForm: {
+      handler () {
+        this.error = null
+      },
+      deep: true
+    }
+  },
   methods: {
     submitForm (formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          this.axios.post('/login', this.ruleForm).then(res => {
-            console.log('@res: ', res)
+          this.axios.post('/login', this.ruleForm).then(({ data }) => {
+            localStorage.setItem('token', data.token)
+            this.$store.commit('auth/SET_USER', data.user)
+            this.$router.push({ name: 'Home' })
+          }).catch(err => {
+            this.error = err.response.data.message
           })
-        } else {
-          console.log('error submit!!')
-          return false
         }
       })
     },

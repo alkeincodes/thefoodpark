@@ -13,9 +13,12 @@
   }
 }
 
-.el-input {
-  &__inner {
-    border: none;
-    font-family: 'Quicksand', sans-serif;
+
+.search-box {
+  .el-input {
+    &__inner {
+      border: none;
+      font-family: 'Quicksand', sans-serif;
+    }
   }
 }

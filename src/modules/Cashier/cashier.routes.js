@@ -2,8 +2,8 @@ const Index = () => import(/* webpackChunkName: "cashier-index" */ '@/modules/Ca
 
 export default [
   {
-    path: '/home',
-    name: 'Index',
+    path: '/cashier-home',
+    name: 'CashierHome',
     component: Index
   }
 ]
