@@ -6,7 +6,8 @@ const namespaced = true
 
 const state = {
   authenticated: false,
-  user: null
+  user: null,
+  isLoading: true
 }
 
 const mutations = {
@@ -21,6 +22,7 @@ const mutations = {
 const actions = {
   logout ({ dispatch }) {
     axios.post('/logout').then(async () => {
+      localStorage.removeItem('token')
       await dispatch('authenticate')
       router.push('/')
     })
@@ -30,8 +32,6 @@ const actions = {
       commit('SET_AUTHENTICATED', true)
       commit('SET_USER', data)
 
-      console.log(state.user)
-
       switch (state.user.role) {
         case 'cashier':
           router.push('/cashier-home')
@@ -39,16 +39,22 @@ const actions = {
         default:
           router.push('/')
       }
+
+      setTimeout(() => {
+        state.isLoading = false
+      }, 1000)
     }).catch(() => {
       commit('SET_AUTHENTICATED', false)
       commit('SET_USER', null)
+      state.isLoading = false
     })
   }
 }
 
 const getters = {
   user: state => state.user,
-  authenticated: state => state.authenticated
+  authenticated: state => state.authenticated,
+  isLoading: state => state.isLoading
 }
 
 export default {

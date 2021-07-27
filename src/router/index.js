@@ -6,6 +6,14 @@ import cashier from '@/modules/Cashier/cashier.routes'
 
 Vue.use(VueRouter)
 
+// function isLoggedIn () {
+//   return localStorage.getItem('token')
+// }
+
+// if (isLoggedIn()) {
+
+// }
+
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,

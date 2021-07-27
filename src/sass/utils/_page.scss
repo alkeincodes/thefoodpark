@@ -79,6 +79,17 @@
   }
 }
 
+.page-loading {
+  @include flexbox(row, center, center);
+  background-color: #fff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1000;
+}
+
 @media screen and (max-width: 768px) {
   .main-padding {
     padding-left: $sidenav-collapse-width + $padding * 2;

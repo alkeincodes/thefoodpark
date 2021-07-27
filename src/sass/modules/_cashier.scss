@@ -1,6 +1,15 @@
 .cashier {
-  .search-box {
-    width: 370px;
+  &__header {
+    @include flexbox(row, center, space-between);
+    .search-box {
+      width: 370px;
+    }
+
+    img {
+      border-radius: 50%;
+      width: 40px;
+      cursor: pointer;
+    }
   }
 }
 

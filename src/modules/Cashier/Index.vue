@@ -3,12 +3,22 @@
     <app-header v-if="$route.name !== 'Login'" />
     <sidenav v-if="$route.name !== 'Login'" />
     <div class="cashier main-padding">
-      <el-input
-        v-model="search"
-        class="search-box"
-        placeholder="Search..."
-        prefix-icon="el-icon-search"
-      />
+      <div class="cashier__header">
+        <el-input
+          v-model="search"
+          class="search-box"
+          placeholder="Search..."
+          prefix-icon="el-icon-search"
+        />
+        <el-dropdown trigger="click">
+          <span class="el-dropdown-link">
+            <img src="@/assets/prof.jpg" alt="Profile Picture">
+          </span>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item @click="$store.dispatch('auth/logout')"><span class="text--danger">Logout</span></el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
+      </div>
       <order-list />
       <order-queue />
       <order-delivery />
