@@ -8,11 +8,33 @@
   }
   &__bottom {
     width: 100%;
+    padding-inline: $padding * 4;
+
+    .cash-received {
+      @include flexbox(column, flex-end, flex-end);
+      text-align: right;
+
+      .el-input {
+        width: 100px;
+        padding: $padding $padding * 2;
+        background: #f7f7f7;
+        border: none;
+        border-radius: $border-radius;
+        &.error {
+          border: 1px solid $danger;
+        }
+      }
+    }
   }
   &-cta,
   &-overall {
     @include flexbox(row, center, space-between);
-    padding-inline: $padding * 4;
+
+    & > div {
+      h1 {
+        text-align: right;
+      }
+    }
 
     button {
       width: 150px;

@@ -40,7 +40,6 @@ export default {
   computed: {
     queuedOrderItems () {
       // return this.orderItems.filter(({ status }) => status === 'preparing')
-      console.log(Order.query().all())
       return Order.all()
     },
     orderItems () {

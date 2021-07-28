@@ -46,16 +46,21 @@
           </template>
         </el-table-column>
       </el-table>
-      <vue-numeric
-        v-model="receivedCash"
-        class="el-input customer-cash mt-4"
-        currency="₱"
-        separator=","
-        :precision="2"
-      />
     </div>
 
     <div class="order-summary__bottom">
+      <div class="cash-received">
+        <vue-numeric
+          v-model="receivedCash"
+          class="el-input mt-4"
+          :class="{error: receivedCashError}"
+          currency="₱"
+          separator=","
+          :precision="2"
+          @blur="checkCash"
+        />
+        <p class="text-hint text--danger mt-1" v-if="receivedCashError">{{ receivedCashError }}</p>
+      </div>
       <div class="order-summary-overall">
         <h1>Total:</h1>
         <div>
@@ -82,7 +87,7 @@
       </div>
       <div class="order-summary-cta">
         <el-button type="danger" plain>CANCEL</el-button>
-        <el-button type="primary" @click="checkout">CHECKOUT</el-button>
+        <el-button type="primary" :disabled="receivedCash <= 0" @click="checkout">CHECKOUT</el-button>
       </div>
     </div>
   </div>
@@ -111,47 +116,72 @@ export default {
   data () {
     return {
       orderType: 'dine-in',
-      receivedCash: 0
+      receivedCash: 0,
+      receivedCashError: null
+    }
+  },
+  watch: {
+    receivedCash (val) {
+      if (val > 0) this.receivedCashError = null
     }
   },
   methods: {
+    checkCash () {
+      console.log('check')
+      if (this.receivedCash < this.overAllTotal) this.receivedCashError = 'The received cash is less than the overall total'
+    },
     checkout () {
-      this.$confirm('Are you sure?', 'Warning', {
-        confirmButtonText: 'Yes',
-        cancelButtonText: 'No',
-        type: 'warning'
-      }).then(async () => {
-        // logic for checkout
-        const order = {
-          cashier_id: this.$store.getters['auth/user'].id,
-          ordered_items: JSON.stringify(this.orderedItems),
-          received_cash: this.receivedCash,
-          total_price: this.overAllTotal
-        }
+      const newOrderCounter = +localStorage.getItem('order_counter') + 1
+      const str = '' + newOrderCounter
+      const pad = '0000'
+      const padNumber = pad.substring(0, pad.length - str.length) + str
+      console.log(padNumber)
+      if (this.receivedCash >= this.overAllTotal) {
+        this.$confirm('Are you sure?', 'Warning', {
+          confirmButtonText: 'Yes',
+          cancelButtonText: 'No',
+          type: 'warning'
+        }).then(async () => {
+          // logic for checkout
+          const order = {
+            cashier_id: this.$store.getters['auth/user'].id,
+            ordered_items: JSON.stringify(this.orderedItems),
+            received_cash: this.receivedCash,
+            total_price: this.overAllTotal,
+            type: this.orderType,
+            order_number: `#${padNumber}`
+          }
 
-        // this.axios.post('/create-order', order).then(({ data }) => {
-        //   Order.insertOrUpdate(data)
-        //   this.$router.push({ name: 'CashierHome' })
-        //   this.$message({
-        //     type: 'success',
-        //     message: 'New Order Created Successfully!'
-        //   })
-        // })
-        const { response: { data } } = await Order.api().createOrder(order)
-        Order.insertOrUpdate(data)
-        this.$router.push({ name: 'CashierHome' })
-        this.$message({
-          type: 'success',
-          message: 'New Order Created Successfully!'
+          // update order counter
+          localStorage.setItem('order_counter', newOrderCounter)
+
+          // this.axios.post('/create-order', order).then(({ data }) => {
+          //   Order.insertOrUpdate(data)
+          //   this.$router.push({ name: 'CashierHome' })
+          //   this.$message({
+          //     type: 'success',
+          //     message: 'New Order Created Successfully!'
+          //   })
+          // })
+          const { response: { data } } = await Order.api().createOrder(order)
+          Order.insertOrUpdate(data)
+          this.$router.push({ name: 'CashierHome' })
+          this.$message({
+            type: 'success',
+            message: 'New Order Created Successfully!'
+          })
+        }).catch((e) => {
+          console.error(e.response.data.errors)
+          this.$message({
+            type: 'error',
+            message: 'Something went wrong!'
+          })
+        }).finally(() => {
+          this.receivedCashError = null
         })
-        console.log(data)
-      }).catch((e) => {
-        console.log(e.response)
-        this.$message({
-          type: 'info',
-          message: 'Action Cancelled'
-        })
-      })
+      } else {
+        this.receivedCashError = 'The received cash is less than the overall total'
+      }
     }
   }
 }
