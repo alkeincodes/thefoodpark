@@ -70,18 +70,19 @@ export default {
     reset () {
       this.quantity = 1
       this.$store.commit('cashier/SET_SELECTED_MENU', {})
-      this.isDialogOpen = !this.isDialogOpen
     },
     selectMenu (item) {
       this.$store.commit('cashier/SET_SELECTED_MENU', item)
       this.isDialogOpen = !this.isDialogOpen
     },
     cancelSelectedOrder () {
-      this.isDialogOpen = !this.isDialogOpen
+      console.log('cancel')
+      this.isDialogOpen = false
       this.reset()
     },
     confirmOrder () {
       this.$store.commit('cashier/SET_ORDERED_ITEMS', this.quantity)
+      this.isDialogOpen = false
       this.reset()
     }
   }
