@@ -35,6 +35,8 @@ import OrderDelivery from '@/modules/Cashier/components/OrderDelivery'
 import AppHeader from '@/components/common/App/AppHeader'
 import Sidenav from '@/components/common/App/Sidenav'
 
+import Order from '@/models/Order'
+
 export default {
   name: 'Cashier',
   components: {
@@ -49,8 +51,9 @@ export default {
       search: ''
     }
   },
-  created () {
-
+  async mounted () {
+    const { response: { data } } = await Order.api().fetch()
+    Order.insertOrUpdate({ data })
   }
 }
 </script>

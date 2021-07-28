@@ -114,10 +114,6 @@ const mutations = {
   SET_SELECTED_MENU (state, payload) {
     state.selectedMenu = payload
   },
-  SET_ORDER_STATUS (state, payload) {
-    const index = state.orderItems.findIndex(i => i.id === payload.id)
-    state.orderItems[index].status = payload.status
-  },
   SET_ORDERED_ITEMS (state, quantity) {
     const order = {
       ...state.selectedMenu,

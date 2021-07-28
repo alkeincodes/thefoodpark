@@ -16,11 +16,13 @@
 </template>
 
 <script>
+import Order from '@/models/Order'
+
 export default {
   name: 'OrderList',
   computed: {
     servedOrderItems () {
-      return this.orderItems.filter(({ status }) => status !== 'preparing')
+      return Order.query().where('status', 'done').orWhere('status', 'cancelled').get()
     },
     orderItems () {
       return this.$store.getters['cashier/orderItems']

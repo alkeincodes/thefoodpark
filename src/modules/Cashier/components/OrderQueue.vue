@@ -4,7 +4,7 @@
     <div class="queue-cards">
       <div class="card order-card" v-for="item in queuedOrderItems" :key="item.id">
         <h1 class="mt-2">{{ item.order_number }}</h1>
-        <component :is="`icon-${item.order_type}`" />
+        <component :is="`icon-${item.type}`" />
         <div class="price">
           <span class="txt-hint">Total Price:</span>
           <p class="amount">
@@ -19,8 +19,8 @@
         </div>
         <hr>
         <div class="card-cta">
-          <el-button type="danger" plain @click="cancelOrder(item.id)"><i class="el-icon-close"></i></el-button>
-          <el-button type="success" plain @click="setOrderDone(item.id)"><i class="el-icon-check"></i></el-button>
+          <el-button type="danger" plain @click="cancelOrder(item)"><i class="el-icon-close"></i></el-button>
+          <el-button type="success" plain @click="setOrderDone(item)"><i class="el-icon-check"></i></el-button>
         </div>
       </div>
       <div class="scroll-fader" style="height: 270px;" />
@@ -40,44 +40,45 @@ export default {
   computed: {
     queuedOrderItems () {
       // return this.orderItems.filter(({ status }) => status === 'preparing')
-      return Order.all()
+      return Order.query().where('status', 'preparing').get()
     },
     orderItems () {
       return this.$store.getters['cashier/orderItems']
     }
   },
   methods: {
-    setOrderDone (id) {
+    setOrderDone (item) {
       this.$confirm('Are you sure this order is done?', 'Warning', {
         confirmButtonText: 'Yes',
         cancelButtonText: 'No',
         type: 'warning'
-      }).then(() => {
-        this.$store.commit('cashier/SET_ORDER_STATUS', { id, status: 'done' })
+      }).then(async () => {
+        // this.$store.commit('cashier/SET_ORDER_STATUS', { id, status: 'done' })
+        item.status = 'done'
+        const { response: { data } } = await Order.api().updateOrder(item)
+        Order.insertOrUpdate(data)
         this.$message({
           type: 'success',
           message: 'Order updated successfully!'
         })
       }).catch(() => {})
     },
-    cancelOrder (id) {
+    cancelOrder (item) {
       this.$confirm('Are you sure you want to cancel this order?', 'Warning', {
         confirmButtonText: 'Yes',
         cancelButtonText: 'No',
         type: 'warning'
-      }).then(() => {
-        this.$store.commit('cashier/SET_ORDER_STATUS', { id, status: 'cancelled' })
+      }).then(async () => {
+        // this.$store.commit('cashier/SET_ORDER_STATUS', { id, status: 'cancelled' })
+        item.status = 'cancelled'
+        const { response: { data } } = await Order.api().updateOrder(item)
+        Order.insertOrUpdate(data)
         this.$message({
           type: 'success',
           message: 'Order cancelled successfully!'
         })
       }).catch(() => {})
     }
-  },
-  async mounted () {
-    const { response: { data } } = await Order.api().fetch()
-    Order.insertOrUpdate({ data })
-    console.log('order')
   }
 }
 </script>
