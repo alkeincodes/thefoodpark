@@ -35,7 +35,7 @@
       </div>
       <span slot="footer" class="dialog-footer">
         <el-button type="danger" @click="cancelSelectedOrder" plain>Cancel</el-button>
-        <el-button type="primary" @click="isDialogOpen = false">Confirm</el-button>
+        <el-button type="primary" @click="confirmOrder">Confirm</el-button>
       </span>
     </el-dialog>
   </div>
@@ -67,14 +67,22 @@ export default {
     }
   },
   methods: {
+    reset () {
+      this.quantity = 1
+      this.$store.commit('cashier/SET_SELECTED_MENU', {})
+      this.isDialogOpen = !this.isDialogOpen
+    },
     selectMenu (item) {
       this.$store.commit('cashier/SET_SELECTED_MENU', item)
       this.isDialogOpen = !this.isDialogOpen
     },
     cancelSelectedOrder () {
       this.isDialogOpen = !this.isDialogOpen
-      this.quantity = 1
-      this.$store.commit('cashier/SET_SELECTED_MENU', {})
+      this.reset()
+    },
+    confirmOrder () {
+      this.$store.commit('cashier/SET_ORDERED_ITEMS', this.quantity)
+      this.reset()
     }
   }
 }

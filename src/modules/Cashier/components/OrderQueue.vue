@@ -30,6 +30,7 @@
 
 <script>
 import VueNumeric from 'vue-numeric'
+import Order from '@/models/Order'
 
 export default {
   name: 'OrderQueue',
@@ -38,7 +39,9 @@ export default {
   },
   computed: {
     queuedOrderItems () {
-      return this.orderItems.filter(({ status }) => status === 'preparing')
+      // return this.orderItems.filter(({ status }) => status === 'preparing')
+      console.log(Order.query().all())
+      return Order.all()
     },
     orderItems () {
       return this.$store.getters['cashier/orderItems']
@@ -71,6 +74,11 @@ export default {
         })
       }).catch(() => {})
     }
+  },
+  async mounted () {
+    const { response: { data } } = await Order.api().fetch()
+    Order.insertOrUpdate({ data })
+    console.log('order')
   }
 }
 </script>

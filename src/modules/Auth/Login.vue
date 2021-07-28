@@ -16,7 +16,7 @@
         <el-input v-model="ruleForm.password" placeholder="Password"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="submitForm('ruleForm')">Login</el-button>
+        <el-button type="primary" :loading="isLoading" @click="submitForm('ruleForm')">Login</el-button>
       </el-form-item>
     </el-form>
     <p class="text--danger">{{ error }}</p>
@@ -29,8 +29,9 @@ export default {
   data () {
     return {
       error: null,
+      isLoading: false,
       ruleForm: {
-        email: '',
+        email: 'alkein@codes.com',
         password: ''
       },
       rules: {
@@ -53,14 +54,17 @@ export default {
   },
   methods: {
     submitForm (formName) {
+      this.isLoading = true
       this.$refs[formName].validate((valid) => {
         if (valid) {
           this.axios.post('/login', this.ruleForm).then(({ data }) => {
             localStorage.setItem('token', data.token)
-            this.$store.commit('auth/SET_USER', data.user)
-            this.$router.push({ name: 'Home' })
+            this.$store.dispatch('auth/authenticate')
+            this.isLoading = false
+            this.$router.push({ name: 'CashierHome' })
           }).catch(err => {
             this.error = err.response.data.message
+            this.isLoading = false
           })
         }
       })

@@ -15,10 +15,11 @@
             <img src="@/assets/prof.jpg" alt="Profile Picture">
           </span>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item @click="$store.dispatch('auth/logout')"><span class="text--danger">Logout</span></el-dropdown-item>
+            <el-dropdown-item @click.native="$store.dispatch('auth/logout')"><span class="text--danger">Logout</span></el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </div>
+      <el-button type="primary" class="mt-4" icon="el-icon-plus" @click="$router.push({ name: 'NewOrder' })">New Order</el-button>
       <order-list />
       <order-queue />
       <order-delivery />

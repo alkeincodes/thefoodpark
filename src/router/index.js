@@ -21,7 +21,10 @@ const router = new VueRouter({
     {
       path: '/',
       name: 'Login',
-      component: () => import('@/modules/Auth/Login')
+      component: () => import('@/modules/Auth/Login'),
+      meta: {
+        isHidden: true
+      }
     },
     ...addGuardstoRoutes([]),
     ...addAdminGuardToRoutes([]),
@@ -30,7 +33,10 @@ const router = new VueRouter({
     ]),
     {
       path: '*',
-      component: require('@/components/common/404.vue').default
+      component: require('@/components/common/404.vue').default,
+      meta: {
+        isHidden: true
+      }
     }
   ],
   linkActiveClass: 'active',

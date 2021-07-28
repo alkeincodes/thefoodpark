@@ -21,6 +21,7 @@ import {
   Menu,
   MenuItem,
   MenuItemGroup,
+  Radio,
   RadioGroup,
   RadioButton,
   Submenu,
@@ -53,6 +54,7 @@ Vue.use(Rate)
 Vue.use(Menu)
 Vue.use(MenuItem)
 Vue.use(MenuItemGroup)
+Vue.use(Radio)
 Vue.use(RadioGroup)
 Vue.use(RadioButton)
 Vue.use(Submenu)
