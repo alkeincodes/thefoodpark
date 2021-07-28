@@ -21,6 +21,7 @@ const mutations = {
 
 const actions = {
   logout ({ dispatch }) {
+    console.log('logout')
     axios.post('/logout').then(async () => {
       localStorage.removeItem('token')
       await dispatch('authenticate')
