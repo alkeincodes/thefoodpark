@@ -8,7 +8,10 @@ export default class User extends Base {
     actions: {
       fetch: {
         url: '/orders',
-        dataKey: 'data'
+        dataKey: 'data',
+        dataTransformer: response => {
+          return response.data || []
+        }
       },
       createOrder (params) {
         return this.post('/orders', params)

@@ -17,9 +17,9 @@
         >
         </el-table-column>
         <el-table-column label="Price">
-          <template slot-scope="scope">
+          <template slot-scope="props">
             <vue-numeric
-              v-model="scope.row.price"
+              v-model="props.row.price"
               currency="₱"
               separator=","
               :precision="2"
@@ -27,11 +27,11 @@
             />
           </template>
         </el-table-column>
-        <el-table-column
-          prop="quantity"
-          label="Quantity"
-          align="center"
-        >
+        <el-table-column label="Quantity" align="center" >
+          <template slot-scope="props">
+            <el-input v-if="toggleQtyEdit" @blur="toggleQtyEdit = false" v-model="props.row.quantity" />
+            <span v-else @click="toggleQtyEdit = true">{{ props.row.quantity }}</span>
+          </template>
         </el-table-column>
         <el-table-column label="Total">
           <template slot-scope="props">
@@ -45,6 +45,11 @@
             />
           </template>
         </el-table-column>
+        <!-- <el-table-column>
+          <template slot-scope="props">
+            <el-button type="primary" size="mini" @click="$emit('edit-order-item', props.row)">Edit</el-button>
+          </template>
+        </el-table-column> -->
       </el-table>
     </div>
 
@@ -117,7 +122,8 @@ export default {
     return {
       orderType: 'dine-in',
       receivedCash: 0,
-      receivedCashError: null
+      receivedCashError: null,
+      toggleQtyEdit: false
     }
   },
   watch: {

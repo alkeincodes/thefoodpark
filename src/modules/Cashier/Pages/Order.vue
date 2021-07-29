@@ -72,6 +72,7 @@ export default {
       this.$store.commit('cashier/SET_SELECTED_MENU', {})
     },
     selectMenu (item) {
+      this.quantity = item.quantity || 1
       this.$store.commit('cashier/SET_SELECTED_MENU', item)
       this.isDialogOpen = !this.isDialogOpen
     },

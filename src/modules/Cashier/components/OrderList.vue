@@ -3,7 +3,7 @@
     <h3 class="site-title">Order List</h3>
     <div class="order-list">
       <el-button
-        v-for="item in servedOrderItems"
+        v-for="item in items"
         :key="item.id"
         :type="item.status === 'done' ? 'success' : 'danger'"
         plain
@@ -16,14 +16,15 @@
 </template>
 
 <script>
-import Order from '@/models/Order'
-
 export default {
   name: 'OrderList',
+  props: {
+    items: {
+      type: Array,
+      default: () => []
+    }
+  },
   computed: {
-    servedOrderItems () {
-      return Order.query().where('status', 'done').orWhere('status', 'cancelled').get()
-    },
     orderItems () {
       return this.$store.getters['cashier/orderItems']
     }

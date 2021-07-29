@@ -1,5 +1,6 @@
 <template>
   <div class="component-padding-top">
+    <h3 class="site-title">Delivery</h3>
     <el-table
       :data="data"
       class="responsive-table"

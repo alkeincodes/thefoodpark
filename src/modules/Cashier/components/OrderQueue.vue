@@ -2,7 +2,7 @@
   <div class="order-queue component-padding-top horizontal-scroll">
     <h3 class="site-title">Order Queue</h3>
     <div class="queue-cards">
-      <div class="card order-card" v-for="item in queuedOrderItems" :key="item.id">
+      <div class="card order-card" v-for="item in items" :key="item.id">
         <h1 class="mt-2">{{ item.order_number }}</h1>
         <component :is="`icon-${item.type}`" />
         <div class="price">
@@ -34,14 +34,16 @@ import Order from '@/models/Order'
 
 export default {
   name: 'OrderQueue',
+  props: {
+    items: {
+      type: Array,
+      default: () => []
+    }
+  },
   components: {
     VueNumeric
   },
   computed: {
-    queuedOrderItems () {
-      // return this.orderItems.filter(({ status }) => status === 'preparing')
-      return Order.query().where('status', 'preparing').get()
-    },
     orderItems () {
       return this.$store.getters['cashier/orderItems']
     }

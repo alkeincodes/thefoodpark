@@ -20,8 +20,8 @@
         </el-dropdown>
       </div>
       <el-button type="primary" class="mt-4" icon="el-icon-plus" @click="$router.push({ name: 'NewOrder' })">New Order</el-button>
-      <order-list />
-      <order-queue />
+      <order-list v-if="processedOrder.length" :items="processedOrder" />
+      <order-queue v-if="queuedOrderItems.length" :items="queuedOrderItems" />
       <order-delivery />
     </div>
   </div>
@@ -45,6 +45,15 @@ export default {
     OrderDelivery,
     AppHeader,
     Sidenav
+  },
+  computed: {
+    queuedOrderItems () {
+      // return this.orderItems.filter(({ status }) => status === 'preparing')
+      return Order.query().where('status', 'preparing').get()
+    },
+    processedOrder () {
+      return Order.query().where('status', 'done').orWhere('status', 'cancelled').get()
+    }
   },
   data () {
     return {
