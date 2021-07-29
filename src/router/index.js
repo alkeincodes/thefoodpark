@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import { addGuardstoRoutes, addAdminGuardToRoutes, addCashierGuardToRoutes } from './guards'
+import { addGuardstoRoutes, addCashierGuardToRoutes } from './guards'
 // import store from '@/store'
 import cashier from '@/modules/Cashier/cashier.routes'
 
@@ -26,8 +26,9 @@ const router = new VueRouter({
         isHidden: true
       }
     },
+    // global auth routes
     ...addGuardstoRoutes([]),
-    ...addAdminGuardToRoutes([]),
+    // auth cashier routes
     ...addCashierGuardToRoutes([
       ...cashier
     ]),
@@ -43,16 +44,18 @@ const router = new VueRouter({
   linkExactActiveClass: 'active'
 })
 
-// router.beforeEach((to, from, next) => {
-//   if (to.matched.some(record => record.meta.requiresVisitor)) {
-//     if (store.getters['auth/authenticated']) {
-//       next('/')
-//     } else {
-//       next()
-//     }
-//   } else {
-//     next() // make sure to always call next()!
-//   }
+// router.beforeEach(async (to, from, next) => {
+// const isLoggedIn = await store.dispatch('auth/authenticate')
+
+// console.log('isLoggedIn: ', isLoggedIn)
+
+// if (isLoggedIn && to.name !== 'Login') {
+//   next()
+// } else if (isLoggedIn && to.name === 'Login') {
+//   next('/cashier-home')
+// } else if (!isLoggedIn) {
+//   next('/')
+// }
 // })
 
 export default router

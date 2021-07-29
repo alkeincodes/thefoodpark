@@ -6,8 +6,7 @@ const namespaced = true
 
 const state = {
   authenticated: false,
-  user: null,
-  isLoading: true
+  user: null
 }
 
 const mutations = {
@@ -33,29 +32,18 @@ const actions = {
       commit('SET_AUTHENTICATED', true)
       commit('SET_USER', data)
 
-      switch (state.user.role) {
-        case 'cashier':
-          router.push('/cashier-home')
-          break
-        default:
-          router.push('/')
-      }
-
-      setTimeout(() => {
-        state.isLoading = false
-      }, 1000)
+      return true
     }).catch(() => {
       commit('SET_AUTHENTICATED', false)
       commit('SET_USER', null)
-      state.isLoading = false
+      return false
     })
   }
 }
 
 const getters = {
   user: state => state.user,
-  authenticated: state => state.authenticated,
-  isLoading: state => state.isLoading
+  authenticated: state => state.authenticated
 }
 
 export default {
