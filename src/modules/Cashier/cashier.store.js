@@ -5,6 +5,7 @@ const state = {
   selectedMenu: {},
   orderedItems: [],
   orderItems: [],
+  selectedOrder: {},
   foodMenu: [
     {
       categoryName: 'Category',
@@ -119,8 +120,20 @@ const mutations = {
       ...state.selectedMenu,
       quantity
     }
-
     state.orderedItems.push(order)
+  },
+  CLEAR_ORDERED_ITEMS (state) {
+    state.orderedItems = []
+  },
+  REMOVE_ORDERED_ITEM (state, itemId) {
+    const index = state.orderedItems.findIndex(({ id }) => id === itemId)
+
+    console.log('index', index)
+
+    state.orderedItems.splice(index, 1)
+  },
+  SET_SELECTED_ORDER (state, payload) {
+    state.selectedOrder = payload
   }
 }
 
@@ -133,7 +146,8 @@ const getters = {
   selectedMenu: state => state.selectedMenu,
   foodMenu: state => state.foodMenu,
   orderItems: state => state.orderItems,
-  orderedItems: state => state.orderedItems
+  orderedItems: state => state.orderedItems,
+  selectedOrder: state => state.selectedOrder
 }
 
 export default {
