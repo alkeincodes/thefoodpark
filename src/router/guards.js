@@ -19,6 +19,14 @@ export const cashierRouteGuard = async (to, from, next) => {
   }
 }
 
+export const adminRouteGuard = async (to, from, next) => {
+  if (store.getters['auth/user'].role === 'admin') {
+    next()
+  } else {
+    next('/')
+  }
+}
+
 export const addGuardstoRoutes = routes =>
   routes.map(r => {
     r.beforeEnter = multiguard([authRouteGuard])
@@ -29,6 +37,13 @@ export const addGuardstoRoutes = routes =>
 export const addCashierGuardToRoutes = routes =>
   routes.map(r => {
     r.beforeEnter = multiguard([authRouteGuard, cashierRouteGuard])
+    r.props = true
+    return r
+  })
+
+export const addAdminGuardToRoutes = routes =>
+  routes.map(r => {
+    r.beforeEnter = multiguard([authRouteGuard, adminRouteGuard])
     r.props = true
     return r
   })

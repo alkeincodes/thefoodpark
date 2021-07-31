@@ -10,7 +10,7 @@
   &__logo {
     text-align: center;
     img {
-      border-radius: 50%;
+      width: 150px;
     }
   }
 
@@ -29,7 +29,7 @@
           margin-right: $margin * 2;
         }
 
-        &.active {
+        &.exact-active {
           background-color: $primary-light;
           font-weight: 500;
           color: $primary;
@@ -38,6 +38,23 @@
             path {
               fill: #409eff !important;
             }
+          }
+        }
+      }
+
+      .el-collapse {
+        padding: $padding * 1.5 $padding * 2;
+        border: none;
+        svg {
+          margin-right: $margin * 2;
+        }
+        span {
+          font-size: $font-md !important;
+        }
+
+        &-item {
+          &__wrap {
+            border: none;
           }
         }
       }
