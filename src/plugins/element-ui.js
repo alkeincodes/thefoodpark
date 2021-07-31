@@ -25,7 +25,8 @@ import {
   RadioGroup,
   RadioButton,
   Submenu,
-  MessageBox
+  MessageBox,
+  Option
 } from 'element-ui'
 import CollapseTransition from 'element-ui/lib/transitions/collapse-transition'
 import lang from 'element-ui/lib/locale/lang/en'
@@ -58,6 +59,7 @@ Vue.use(Radio)
 Vue.use(RadioGroup)
 Vue.use(RadioButton)
 Vue.use(Submenu)
+Vue.use(Option)
 
 Vue.prototype.$message = Message
 Vue.prototype.$confirm = MessageBox.confirm
