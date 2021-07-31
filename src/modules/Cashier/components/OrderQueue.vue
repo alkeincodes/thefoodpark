@@ -2,14 +2,14 @@
   <div class="order-queue component-padding-top horizontal-scroll">
     <h3 class="site-title">Order Queue</h3>
     <div class="queue-cards">
-      <div class="card order-card" v-for="item in items" :key="item.id">
+      <div class="card order-card" v-for="item in items" :key="item.id" @click="$emit('select-item', item)">
         <h1 class="mt-2">{{ item.order_number }}</h1>
         <component :is="`icon-${item.type}`" />
         <div class="price">
           <span class="txt-hint">Total Price:</span>
           <p class="amount">
             <vue-numeric
-              :value="item.total"
+              :value="item.total_price"
               currency="₱"
               separator=","
               :precision="2"
@@ -19,8 +19,8 @@
         </div>
         <hr>
         <div class="card-cta">
-          <el-button type="danger" plain @click="cancelOrder(item)"><i class="el-icon-close"></i></el-button>
-          <el-button type="success" plain @click="setOrderDone(item)"><i class="el-icon-check"></i></el-button>
+          <el-button type="danger" plain @click.stop="cancelOrder(item)"><i class="el-icon-close"></i></el-button>
+          <el-button type="success" plain @click.stop="setOrderDone(item)"><i class="el-icon-check"></i></el-button>
         </div>
       </div>
       <div class="scroll-fader" style="height: 270px;" />
@@ -48,6 +48,9 @@ export default {
       return this.$store.getters['cashier/orderItems']
     }
   },
+  created () {
+    console.log('items: ', this.items)
+  },
   methods: {
     setOrderDone (item) {
       this.$confirm('Are you sure this order is done?', 'Warning', {
@@ -55,7 +58,6 @@ export default {
         cancelButtonText: 'No',
         type: 'warning'
       }).then(async () => {
-        // this.$store.commit('cashier/SET_ORDER_STATUS', { id, status: 'done' })
         item.status = 'done'
         const { response: { data } } = await Order.api().updateOrder(item)
         Order.insertOrUpdate(data)
@@ -71,7 +73,6 @@ export default {
         cancelButtonText: 'No',
         type: 'warning'
       }).then(async () => {
-        // this.$store.commit('cashier/SET_ORDER_STATUS', { id, status: 'cancelled' })
         item.status = 'cancelled'
         const { response: { data } } = await Order.api().updateOrder(item)
         Order.insertOrUpdate(data)

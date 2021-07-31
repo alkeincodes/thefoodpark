@@ -77,7 +77,6 @@ export default {
       this.isDialogOpen = !this.isDialogOpen
     },
     cancelSelectedOrder () {
-      console.log('cancel')
       this.isDialogOpen = false
       this.reset()
     },

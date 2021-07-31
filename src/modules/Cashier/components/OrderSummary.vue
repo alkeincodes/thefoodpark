@@ -7,6 +7,13 @@
         <el-radio label="takeout">Takeout</el-radio>
         <el-radio label="delivery">Delivery</el-radio>
       </el-radio-group>
+      <el-input
+        v-model="tableNumber"
+        class="table-number mt-4"
+        placeholder="Table Number"
+        type="number"
+      />
+      <p class="text-hint mt-1 mb-4">Automatically prefix with 'Table'</p>
       <el-table
         :data="orderedItems"
         style="width: 100%"
@@ -45,11 +52,11 @@
             />
           </template>
         </el-table-column>
-        <!-- <el-table-column>
+        <el-table-column width="50">
           <template slot-scope="props">
-            <el-button type="primary" size="mini" @click="$emit('edit-order-item', props.row)">Edit</el-button>
+            <el-button size="mini" type="danger" @click="$store.commit('cashier/REMOVE_ORDERED_ITEM', props.row.id)" icon="el-icon-delete" circle plain />
           </template>
-        </el-table-column> -->
+        </el-table-column>
       </el-table>
     </div>
 
@@ -92,7 +99,7 @@
       </div>
       <div class="order-summary-cta">
         <el-button type="danger" plain>CANCEL</el-button>
-        <el-button type="primary" :disabled="receivedCash <= 0" @click="checkout">CHECKOUT</el-button>
+        <el-button type="primary" :disabled="receivedCash <= 0 || !tableNumber || orderedItems.length == 0" @click="checkout">CHECKOUT</el-button>
       </div>
     </div>
   </div>
@@ -104,6 +111,12 @@ import Order from '@/models/Order'
 
 export default {
   name: 'OrderSummary',
+  props: {
+    readOnly: {
+      type: Boolean,
+      default: false
+    }
+  },
   components: { VueNumeric },
   computed: {
     orderedItems () {
@@ -122,6 +135,7 @@ export default {
     return {
       orderType: 'dine-in',
       receivedCash: 0,
+      tableNumber: null,
       receivedCashError: null,
       toggleQtyEdit: false
     }
@@ -133,7 +147,6 @@ export default {
   },
   methods: {
     checkCash () {
-      console.log('check')
       if (this.receivedCash < this.overAllTotal) this.receivedCashError = 'The received cash is less than the overall total'
     },
     checkout () {
@@ -151,15 +164,13 @@ export default {
           // logic for checkout
           const order = {
             cashier_id: this.$store.getters['auth/user'].id,
-            ordered_items: JSON.stringify(this.orderedItems),
+            ordered_items: this.orderedItems,
             received_cash: this.receivedCash,
             total_price: this.overAllTotal,
             type: this.orderType,
-            order_number: `#${padNumber}`
+            order_number: `#${padNumber}`,
+            table_number: this.tableNumber
           }
-
-          // update order counter
-          localStorage.setItem('order_counter', newOrderCounter)
 
           // this.axios.post('/create-order', order).then(({ data }) => {
           //   Order.insertOrUpdate(data)
@@ -171,7 +182,13 @@ export default {
           // })
           const { response: { data } } = await Order.api().createOrder(order)
           Order.insertOrUpdate(data)
+
+          // update order counter
+          localStorage.setItem('order_counter', newOrderCounter)
+
           this.$router.push({ name: 'CashierHome' })
+          this.$store.commit('cashier/CLEAR_ORDERED_ITEMS')
+
           this.$message({
             type: 'success',
             message: 'New Order Created Successfully!'
