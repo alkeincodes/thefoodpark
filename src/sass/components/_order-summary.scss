@@ -5,6 +5,16 @@
 
   &__top {
     width: 100%;
+
+    .table-number {
+      
+      .el-input__inner {
+        background: #f7f7f7;
+        border: none;
+        width: 50%;
+        font-size: 12px;
+      }
+    }
   }
   &__bottom {
     width: 100%;
