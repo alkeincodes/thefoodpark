@@ -61,7 +61,7 @@ export default {
             localStorage.setItem('token', data.token)
             this.$store.dispatch('auth/authenticate')
             this.isLoading = false
-            this.$router.push({ name: 'CashierHome' })
+            this.$router.push({ name: data.user.role })
           }).catch(err => {
             this.error = err.response.data.message
             this.isLoading = false
@@ -76,7 +76,7 @@ export default {
   async mounted () {
     await this.$store.dispatch('auth/authenticate')
     if (this.$store.getters['auth/authenticated']) {
-      this.$router.push('/cashier-home')
+      this.$router.push({ name: this.$store.getters['auth/user'].role })
     }
   }
 }
