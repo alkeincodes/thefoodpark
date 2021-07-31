@@ -72,6 +72,12 @@ export default {
     resetForm (formName) {
       this.$refs[formName].resetFields()
     }
+  },
+  async mounted () {
+    await this.$store.dispatch('auth/authenticate')
+    if (this.$store.getters['auth/authenticated']) {
+      this.$router.push('/cashier-home')
+    }
   }
 }
 </script>
