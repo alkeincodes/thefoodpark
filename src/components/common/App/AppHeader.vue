@@ -1,6 +1,6 @@
 <template>
   <header class="site-header">
-    <h2>Project Name</h2>
+    <h2>The Food Park</h2>
   </header>
 </template>
 
