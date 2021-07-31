@@ -1,8 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import { addGuardstoRoutes, addCashierGuardToRoutes } from './guards'
+import { addGuardstoRoutes, addCashierGuardToRoutes, addAdminGuardToRoutes } from './guards'
 // import store from '@/store'
 import cashier from '@/modules/Cashier/cashier.routes'
+import admin from '@/modules/Admin/admin.routes'
 
 Vue.use(VueRouter)
 
@@ -32,6 +33,9 @@ const router = new VueRouter({
     ...addCashierGuardToRoutes([
       ...cashier
     ]),
+    ...addAdminGuardToRoutes([
+      ...admin
+    ]),
     {
       path: '*',
       component: require('@/components/common/404.vue').default,
@@ -41,7 +45,7 @@ const router = new VueRouter({
     }
   ],
   linkActiveClass: 'active',
-  linkExactActiveClass: 'active'
+  linkExactActiveClass: 'exact-active'
 })
 
 // router.beforeEach(async (to, from, next) => {

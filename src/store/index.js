@@ -8,6 +8,7 @@ import database from '@/store/database'
 
 // install store files per module
 import auth from '@/modules/Auth/auth.store'
+import admin from '@/modules/Admin/admin.store'
 import cashier from '@/modules/Cashier/cashier.store'
 
 Vue.use(Vuex)
@@ -19,6 +20,7 @@ VuexORM.use(VuexORMAxios, {
 export default new Vuex.Store({
   modules: {
     auth,
+    admin,
     cashier
   },
   plugins: [VuexORM.install(database)]
