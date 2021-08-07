@@ -16,6 +16,9 @@ export default class Menu extends Base {
       },
       createMenu (params) {
         return this.post('', params)
+      },
+      deleteMenu (params) {
+        return this.delete(`/${params.id}`, params)
       }
     }
   }
@@ -27,6 +30,7 @@ export default class Menu extends Base {
       category: this.belongsTo(Category, 'category_id'),
       name: this.attr(null),
       price: this.attr(null),
+      image: this.attr(null),
       ...super.fields()
     }
   }

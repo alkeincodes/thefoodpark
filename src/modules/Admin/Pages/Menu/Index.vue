@@ -11,6 +11,11 @@
         label="Name"
         width="180">
       </el-table-column>
+      <el-table-column label="Image">
+        <template slot-scope="props">
+          <img :src="`${sourceUrl}/menus/${props.row.image}`" :alt="props.row.name">
+        </template>
+      </el-table-column>
       <el-table-column label="Price">
         <template slot-scope="props">
           <vue-numeric
@@ -30,18 +35,19 @@
       <el-table-column label="Actions">
         <template slot-scope="props">
           <el-button type="primary" size="mini" icon="el-icon-edit" @click.native="openEditModal(props.row)" circle plain />
-          <el-button type="danger" size="mini" icon="el-icon-delete" circle plain />
+          <el-button type="danger" size="mini" icon="el-icon-delete" circle plain @click="deleteMenu(props.row)" />
         </template>
       </el-table-column>
     </el-table>
 
     <el-dialog
-        title="Create Menu"
+        :title="`${modalAction} Menu`"
         :visible.sync="showModal"
         width="30%"
       >
         <create-edit
           :modal-action="modalAction"
+          :source-url="sourceUrl"
           @cancel="showModal = false"
           @success="showModal = false"
         />
@@ -63,6 +69,9 @@ export default {
   computed: {
     menus () {
       return Menu.query().with('category').get()
+    },
+    sourceUrl () {
+      return `${process.env.VUE_APP_API_URL}/storage/`
     }
   },
   data () {
@@ -80,6 +89,16 @@ export default {
       this.modalAction = 'edit'
       this.$store.commit('admin/SET_SELECTED_MENU', item)
       this.showModal = !this.showModal
+    },
+    deleteMenu (item) {
+      this.$confirm('Are you sure?', 'Warning', {
+        confirmButtonText: 'Yes',
+        cancelButtonText: 'No',
+        type: 'warning'
+      }).then(async () => {
+        await Menu.api().deleteMenu(item)
+        Menu.delete(item.id)
+      })
     }
   }
 }
