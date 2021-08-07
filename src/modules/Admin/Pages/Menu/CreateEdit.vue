@@ -125,7 +125,7 @@ export default {
           try {
             const fd = new FormData()
 
-            fd.append('category_id', +this.ruleForm.category_id)
+            fd.append('category_id', this.ruleForm.category_id)
             fd.append('name', this.ruleForm.name)
             fd.append('price', this.ruleForm.price)
 
