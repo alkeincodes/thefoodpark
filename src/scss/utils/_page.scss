@@ -46,6 +46,15 @@
     &::-webkit-scrollbar-thumb {
       background-color: #cecece;
     }
+
+    .search-box {
+      @include flexbox(row, center, initial);
+      width: 40%;
+      padding: 50px;
+      .el-button {
+        margin-left: $margin * 2;
+      }
+    }
   }
 
   &__right {

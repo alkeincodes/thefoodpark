@@ -1,6 +1,10 @@
 <template>
   <div class="order-page">
     <div class="order-page__left">
+      <div class="search-box">
+        <el-input v-model="searchMenu" placeholder="Search a menu"></el-input>
+        <el-button type="primary">Search</el-button>
+      </div>
       <categorize-products
         v-for="(menu, key) in categorizedMenu"
         :key="key"
@@ -55,7 +59,9 @@
 <script>
 import CategorizeProducts from '@/modules/Cashier/components/CategorizeProducts'
 import OrderSummary from '@/modules/Cashier/components/OrderSummary'
+
 import Category from '@/models/Category'
+
 import VueNumeric from 'vue-numeric'
 
 export default {
@@ -69,7 +75,8 @@ export default {
     return {
       isDialogOpen: false,
       quantity: 1,
-      isQtyReadOnly: true
+      isQtyReadOnly: true,
+      search: ''
     }
   },
   computed: {
@@ -80,8 +87,15 @@ export default {
       return this.$store.getters['cashier/selectedMenu']
     },
     categorizedMenu () {
-      console.log('categorized', Category.query().with('menus').get())
       return Category.query().with('menus').get()
+    },
+    searchMenu: {
+      get () {
+        return this.$store.getters['cashier/searchMenu']
+      },
+      set (val) {
+        this.$store.commit('cashier/SET_SEARCH_MENU', val)
+      }
     }
   },
   methods: {

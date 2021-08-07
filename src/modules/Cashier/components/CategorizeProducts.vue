@@ -2,7 +2,7 @@
   <div class="products">
     <div class="products__list">
       <div
-        v-for="(item, key) in data.menus"
+        v-for="(item, key) in data.menus.filter(m => m.name.toLowerCase().includes(searchMenu.toLowerCase()))"
         :key="key"
         class="product-menu"
       >
@@ -46,6 +46,11 @@ export default {
       default: () => {}
     }
   },
-  components: { VueNumeric }
+  components: { VueNumeric },
+  computed: {
+    searchMenu () {
+      return this.$store.getters['cashier/searchMenu']
+    }
+  }
 }
 </script>

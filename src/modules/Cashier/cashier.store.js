@@ -6,108 +6,7 @@ const state = {
   orderedItems: [],
   orderItems: [],
   selectedOrder: {},
-  foodMenu: [
-    {
-      categoryName: 'Category',
-      products: [
-        {
-          id: 1,
-          name: 'Product Name',
-          price: 30,
-          image: 'https://source.unsplash.com/random/150x150'
-        },
-        {
-          id: 2,
-          name: 'Product Name',
-          price: 10,
-          image: 'https://source.unsplash.com/random/150x150'
-        },
-        {
-          id: 3,
-          name: 'Product Name',
-          price: 40,
-          image: 'https://source.unsplash.com/random/150x150'
-        },
-        {
-          id: 4,
-          name: 'Product Name',
-          price: 20,
-          image: 'https://source.unsplash.com/random/150x150'
-        },
-        {
-          id: 5,
-          name: 'Product Name',
-          price: 20,
-          image: 'https://source.unsplash.com/random/150x150'
-        },
-        {
-          id: 6,
-          name: 'Product Name',
-          price: 70,
-          image: 'https://source.unsplash.com/random/150x150'
-        },
-        {
-          id: 7,
-          name: 'Product Name',
-          price: 60,
-          image: 'https://source.unsplash.com/random/150x150'
-        },
-        {
-          id: 8,
-          name: 'Product Name',
-          price: 30,
-          image: 'https://source.unsplash.com/random/150x150'
-        },
-        {
-          id: 9,
-          name: 'Product Name',
-          price: 70,
-          image: 'https://source.unsplash.com/random/150x150'
-        },
-        {
-          id: 10,
-          name: 'Product Name',
-          price: 60,
-          image: 'https://source.unsplash.com/random/150x150'
-        }
-      ]
-    },
-    {
-      categoryName: 'Category #2',
-      products: [
-        {
-          id: 1,
-          name: 'Product Name',
-          price: 30,
-          image: 'https://source.unsplash.com/random/150x150'
-        },
-        {
-          id: 2,
-          name: 'Product Name',
-          price: 50,
-          image: 'https://source.unsplash.com/random/150x150'
-        },
-        {
-          id: 3,
-          name: 'Product Name',
-          price: 30,
-          image: 'https://source.unsplash.com/random/150x150'
-        },
-        {
-          id: 4,
-          name: 'Product Name',
-          price: 40,
-          image: 'https://source.unsplash.com/random/150x150'
-        },
-        {
-          id: 5,
-          name: 'Product Name',
-          price: 50,
-          image: 'https://source.unsplash.com/random/150x150'
-        }
-      ]
-    }
-  ]
+  searchMenu: ''
 }
 
 const mutations = {
@@ -134,6 +33,9 @@ const mutations = {
   },
   SET_SELECTED_ORDER (state, payload) {
     state.selectedOrder = payload
+  },
+  SET_SEARCH_MENU (state, payload) {
+    state.searchMenu = payload
   }
 }
 
@@ -147,7 +49,8 @@ const getters = {
   foodMenu: state => state.foodMenu,
   orderItems: state => state.orderItems,
   orderedItems: state => state.orderedItems,
-  selectedOrder: state => state.selectedOrder
+  selectedOrder: state => state.selectedOrder,
+  searchMenu: state => state.searchMenu
 }
 
 export default {
