@@ -26,7 +26,7 @@
         :items="queuedOrderItems"
         @select-item="selectOrder"
       />
-      <order-delivery />
+      <!-- <order-delivery /> -->
 
       <!-- SHOW ORDER -->
     <el-dialog :title="`Selected Order: ${selectedOrder.order_number}`" :visible.sync="isShowOrder">
@@ -76,7 +76,7 @@ import Sidenav from '@/components/common/App/Sidenav'
 
 import OrderList from '@/modules/Cashier/components/OrderList'
 import OrderQueue from '@/modules/Cashier/components/OrderQueue'
-import OrderDelivery from '@/modules/Cashier/components/OrderDelivery'
+// import OrderDelivery from '@/modules/Cashier/components/OrderDelivery'
 import VueNumeric from 'vue-numeric'
 
 import Order from '@/models/Order'
@@ -87,7 +87,7 @@ export default {
   components: {
     OrderList,
     OrderQueue,
-    OrderDelivery,
+    // OrderDelivery,
     AppHeader,
     Sidenav,
     VueNumeric
