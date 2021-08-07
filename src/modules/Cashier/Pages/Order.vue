@@ -2,7 +2,7 @@
   <div class="order-page">
     <div class="order-page__left">
       <categorize-products
-        v-for="(menu, key) in foodMenu"
+        v-for="(menu, key) in categorizedMenu"
         :key="key"
         :data="menu"
         @select-menu="selectMenu"
@@ -19,10 +19,21 @@
     >
       <div class="selected-menu-item">
         <img
-          :src="selectedMenu.image"
+          :src="`${filePath}/menus/${selectedMenu.image}`"
           :alt="selectedMenu.name"
         >
-        <div class="selected-menu-item__title mt-2">How many <strong>{{ selectedMenu.name }}?</strong></div>
+        <div class="selected-menu-item__title mt-2">How many
+          <strong>
+            {{ selectedMenu.name }} @
+            <vue-numeric
+                :value="selectedMenu.price"
+                currency="₱"
+                separator=","
+                :precision="2"
+                read-only
+            />?
+          </strong>
+        </div>
         <div class="readonly-container" @click="isQtyReadOnly = !isQtyReadOnly">
           <el-input
             v-model="quantity"
@@ -44,12 +55,15 @@
 <script>
 import CategorizeProducts from '@/modules/Cashier/components/CategorizeProducts'
 import OrderSummary from '@/modules/Cashier/components/OrderSummary'
+import Category from '@/models/Category'
+import VueNumeric from 'vue-numeric'
 
 export default {
   name: 'Welcome',
   components: {
     CategorizeProducts,
-    OrderSummary
+    OrderSummary,
+    VueNumeric
   },
   data () {
     return {
@@ -64,6 +78,10 @@ export default {
     },
     selectedMenu () {
       return this.$store.getters['cashier/selectedMenu']
+    },
+    categorizedMenu () {
+      console.log('categorized', Category.query().with('menus').get())
+      return Category.query().with('menus').get()
     }
   },
   methods: {
@@ -85,6 +103,9 @@ export default {
       this.isDialogOpen = false
       this.reset()
     }
+  },
+  async created () {
+    await Category.api().fetch()
   }
 }
 </script>

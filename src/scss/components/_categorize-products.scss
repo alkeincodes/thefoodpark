@@ -22,6 +22,9 @@
   }
   img {
     cursor: pointer;
+    object-fit: cover;
+    width: 150px;
+    height: 150px;
   }
   .category-name {
     position: absolute;
@@ -30,5 +33,13 @@
     font-size: $font-lg;
     font-weight: bold;
     text-transform: capitalize;
+  }
+}
+
+.selected-menu-item {
+  img {
+    object-fit: cover;
+    width: 250px;
+    height: 250px;
   }
 }

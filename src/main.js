@@ -11,13 +11,12 @@ import './plugins/element-ui'
 import axios from './api/axios'
 Vue.prototype.axios = axios
 Vue.prototype.moment = moment
+Vue.prototype.filePath = `${process.env.VUE_APP_API_URL}/storage/`
 
 Vue.config.productionTip = false
 
-// store.dispatch('auth/authenticate').then(() => {
 new Vue({
   router,
   store,
   render: h => h(App)
 }).$mount('#app')
-// })

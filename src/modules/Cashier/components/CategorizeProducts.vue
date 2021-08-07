@@ -2,7 +2,7 @@
   <div class="products">
     <div class="products__list">
       <div
-        v-for="(item, key) in data.products"
+        v-for="(item, key) in data.menus"
         :key="key"
         class="product-menu"
       >
@@ -10,10 +10,10 @@
           v-if="key == 0"
           class="mb-4 category-name"
         >
-          {{ data.categoryName }}
+          {{ data.name }}
         </h3>
         <img
-          :src="item.image"
+          :src="`${filePath}/menus/${item.image}`"
           alt="Image Title"
           class="product-menu__image"
           @click="$emit('select-menu', item)"

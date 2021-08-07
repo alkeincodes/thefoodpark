@@ -98,7 +98,7 @@
         </div>
       </div>
       <div class="order-summary-cta">
-        <el-button type="danger" plain>CANCEL</el-button>
+        <el-button type="danger" plain @click="cancelOrder">CANCEL</el-button>
         <el-button type="primary" :disabled="receivedCash <= 0 || !tableNumber || orderedItems.length == 0" @click="checkout">CHECKOUT</el-button>
       </div>
     </div>
@@ -172,14 +172,6 @@ export default {
             table_number: this.tableNumber
           }
 
-          // this.axios.post('/create-order', order).then(({ data }) => {
-          //   Order.insertOrUpdate(data)
-          //   this.$router.push({ name: 'CashierHome' })
-          //   this.$message({
-          //     type: 'success',
-          //     message: 'New Order Created Successfully!'
-          //   })
-          // })
           const { response: { data } } = await Order.api().createOrder(order)
           Order.insertOrUpdate(data)
 
@@ -205,6 +197,10 @@ export default {
       } else {
         this.receivedCashError = 'The received cash is less than the overall total'
       }
+    },
+    cancelOrder () {
+      this.$store.commit('cashier/CLEAR_ORDERED_ITEMS')
+      this.$router.push({ name: 'Home' })
     }
   }
 }
