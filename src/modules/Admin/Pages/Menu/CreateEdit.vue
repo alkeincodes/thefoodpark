@@ -21,13 +21,25 @@
         <el-input v-model="ruleForm.name" />
       </el-form-item>
       <el-form-item label="Price" prop="price">
-        <vue-numeric
-          v-model="ruleForm.price"
-          class="el-input mt-4"
-          currency="₱"
-          separator=","
-          :precision="2"
-        />
+        <div class="el-input">
+          <vue-numeric
+            v-model="ruleForm.price"
+            class="el-input__inner"
+            currency="₱"
+            separator=","
+            :precision="2"
+          />
+        </div>
+      </el-form-item>
+      <el-form-item>
+        <input type="file" class="form-control-file" id="book_cover" name="selected_cover" @change="onFileChange">
+        <p class="text-hint">Image preview will show below.</p>
+        <div v-if="typeof ruleForm.image == 'object'">
+          <img v-if="imageUrl" :src="imageUrl" height="150" width="150" />
+        </div>
+        <div v-else>
+          <img :src="`${sourceUrl}/menus/${ruleForm.image}`" height="150" width="150" />
+        </div>
       </el-form-item>
       <el-form-item>
         <el-button @click="$emit('cancel')">Cancel</el-button>
@@ -45,13 +57,13 @@ import VueNumeric from 'vue-numeric'
 export default {
   name: 'CreateMenu',
   props: {
-    data: {
-      type: Object,
-      default: () => {}
-    },
     modalAction: {
       type: String,
       default: 'create'
+    },
+    sourceUrl: {
+      type: String,
+      default: null
     }
   },
   components: {
@@ -66,21 +78,34 @@ export default {
     }
   },
   watch: {
+    // watch if selected food menu is changed
+    toEditMenu: {
+      handler (val) {
+        if (val) {
+          this.ruleForm = val
+        }
+      },
+      deep: true,
+      immediate: true
+    },
+    // watch modalAction value and assign the correct data value
     modalAction (val) {
       if (val === 'edit') {
-
+        this.ruleForm = this.toEditMenu
       } else {
-
+        this.resetForm()
       }
     }
   },
   data () {
     return {
       isSaving: false,
+      imageUrl: null,
       ruleForm: {
         category_id: null,
         name: '',
-        price: 0
+        price: 0,
+        image: null
       },
       rules: {
         category_id: [
@@ -98,13 +123,24 @@ export default {
       this.$refs.ruleForm.validate(async (valid) => {
         if (valid) {
           try {
-            // const { response: { data } } =
-            await Menu.api().createMenu(this.ruleForm)
+            const fd = new FormData()
+
+            fd.append('category_id', +this.ruleForm.category_id)
+            fd.append('name', this.ruleForm.name)
+            fd.append('price', this.ruleForm.price)
+
+            // update the image if it is actually a File instance
+            if (this.ruleForm.image instanceof File) {
+              fd.append('image', this.ruleForm.image)
+            }
+
+            await Menu.api().createMenu(fd)
             // Menu.inserOrUpdate({ data })
             this.$message({
               type: 'success',
               message: 'Food menu created successfully!'
             })
+            this.resetForm()
             this.$emit('success')
           } catch (e) {
             console.log('error: ', e.response.data)
@@ -117,6 +153,19 @@ export default {
           }
         }
       })
+    },
+    onFileChange (e) {
+      const file = e.target.files[0]
+      this.imageUrl = URL.createObjectURL(file)
+      this.ruleForm.image = file
+    },
+    resetForm () {
+      this.ruleForm = {
+        category_id: null,
+        name: '',
+        price: 0,
+        image: null
+      }
     }
   }
 }

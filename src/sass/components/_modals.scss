@@ -6,3 +6,9 @@
     }
   }
 }
+
+.el-dialog {
+  &__title {
+    text-transform: capitalize;
+  }
+}
