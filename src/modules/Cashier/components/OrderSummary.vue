@@ -178,7 +178,7 @@ export default {
           // update order counter
           localStorage.setItem('order_counter', newOrderCounter)
 
-          this.$router.push({ name: 'CashierHome' })
+          this.$router.push({ name: 'Home' })
           this.$store.commit('cashier/CLEAR_ORDERED_ITEMS')
 
           this.$message({
