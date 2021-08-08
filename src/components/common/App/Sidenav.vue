@@ -44,9 +44,12 @@ export default {
   },
   computed: {
     routeLinks () {
-      const userRole = this.$store.getters['auth/user'].role
+      const userRole = this.$store.getters['auth/user'].role || null
+      let routes = []
 
-      return this.$router.options.routes.find(({ name }) => name === userRole)
+      if (userRole) routes = this.$router.options.routes.find(({ name }) => name === userRole)
+
+      return routes
     }
   }
 }

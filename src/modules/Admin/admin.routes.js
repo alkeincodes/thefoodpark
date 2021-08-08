@@ -11,7 +11,7 @@ export default [
     children: [
       {
         path: '/',
-        name: 'AdminHome',
+        name: 'admin',
         component: Home,
         meta: {
           icon: 'home',

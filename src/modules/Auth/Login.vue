@@ -13,7 +13,7 @@
         <el-input v-model="ruleForm.email" placeholder="Email Address"></el-input>
       </el-form-item>
       <el-form-item prop="password">
-        <el-input v-model="ruleForm.password" placeholder="Password"></el-input>
+        <el-input v-model="ruleForm.password" type="password" placeholder="Password"></el-input>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" :loading="isLoading" @click="submitForm('ruleForm')">Login</el-button>
