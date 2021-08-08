@@ -1,19 +1,22 @@
 <template>
   <div class="menu-list">
     <!-- <router-view></router-view> -->
-    <el-button type="primary" icon="el-icon-plus" class="mb-2" @click="openCreateModal">Create Menu</el-button>
+    <el-button
+      type="primary"
+      icon="el-icon-plus"
+      class="mb-2"
+      @click="openCreateModal"
+      >Create Menu</el-button
+    >
     <h1 class="site-title mb-2">Food Menu</h1>
-    <el-table
-      :data="menus"
-      style="width: 100%">
-      <el-table-column
-        prop="name"
-        label="Name"
-        width="180">
-      </el-table-column>
+    <el-table :data="menus" style="width: 100%">
+      <el-table-column prop="name" label="Name" width="180"> </el-table-column>
       <el-table-column label="Image">
         <template slot-scope="props">
-          <img :src="`${sourceUrl}/menus/${props.row.image}`" :alt="props.row.name">
+          <img
+            :src="`${sourceUrl}/menus/${props.row.image}`"
+            :alt="props.row.name"
+          />
         </template>
       </el-table-column>
       <el-table-column label="Price">
@@ -34,31 +37,48 @@
       </el-table-column>
       <el-table-column label="Actions">
         <template slot-scope="props">
-          <el-button type="primary" size="mini" icon="el-icon-edit" @click.native="openEditModal(props.row)" circle plain />
-          <el-button type="danger" size="mini" icon="el-icon-delete" circle plain @click="deleteMenu(props.row)" />
+          <el-button
+            type="primary"
+            size="mini"
+            icon="el-icon-edit"
+            @click.native="openEditModal(props.row)"
+            circle
+            plain
+          />
+          <el-button
+            type="danger"
+            size="mini"
+            icon="el-icon-delete"
+            circle
+            plain
+            @click="deleteMenu(props.row)"
+          />
         </template>
       </el-table-column>
     </el-table>
 
     <el-dialog
-        :title="`${modalAction} Menu`"
-        :visible.sync="showModal"
-        width="30%"
-      >
-        <create-edit
-          :modal-action="modalAction"
-          :source-url="sourceUrl"
-          @cancel="showModal = false"
-          @success="showModal = false"
-        />
-      </el-dialog>
+      :title="`${modalAction} Menu`"
+      :visible.sync="showModal"
+      width="30%"
+    >
+      <create-edit
+        :modal-action="modalAction"
+        :source-url="sourceUrl"
+        @cancel="showModal = false"
+        @success="showModal = false"
+      />
+    </el-dialog>
   </div>
 </template>
 
 <script>
 import Menu from '@/models/Menu'
 import VueNumeric from 'vue-numeric'
-const CreateEdit = () => import(/* webpackChunkName: "menu-create-edit" */ '@/modules/Admin/Pages/Menu/CreateEdit')
+const CreateEdit = () =>
+  import(
+    /* webpackChunkName: "menu-create-edit" */ '@/modules/Admin/Pages/Menu/CreateEdit'
+  )
 
 export default {
   name: 'MenuList',
@@ -67,30 +87,30 @@ export default {
     CreateEdit
   },
   computed: {
-    menus () {
+    menus() {
       return Menu.query().with('category').get()
     },
-    sourceUrl () {
+    sourceUrl() {
       return `${process.env.VUE_APP_API_URL}/storage/`
     }
   },
-  data () {
+  data() {
     return {
       showModal: false,
       modalAction: 'create'
     }
   },
   methods: {
-    openCreateModal () {
+    openCreateModal() {
       this.modalAction = 'create'
       this.showModal = !this.showModal
     },
-    openEditModal (item) {
+    openEditModal(item) {
       this.modalAction = 'edit'
       this.$store.commit('admin/SET_SELECTED_MENU', item)
       this.showModal = !this.showModal
     },
-    deleteMenu (item) {
+    deleteMenu(item) {
       this.$confirm('Are you sure?', 'Warning', {
         confirmButtonText: 'Yes',
         cancelButtonText: 'No',

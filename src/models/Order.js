@@ -10,20 +10,20 @@ export default class Order extends Base {
       fetch: {
         url: '',
         dataKey: 'data',
-        dataTransformer: response => {
+        dataTransformer: (response) => {
           return response.data || []
         }
       },
-      createOrder (params) {
+      createOrder(params) {
         return this.post('', params)
       },
-      updateOrder (params) {
+      updateOrder(params) {
         return this.put(`/orders/${params.id}`, params)
       }
     }
   }
 
-  static fields () {
+  static fields() {
     return {
       id: this.attr(null),
       cashier_id: this.attr(null),

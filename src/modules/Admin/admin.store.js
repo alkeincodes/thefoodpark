@@ -5,7 +5,7 @@ const state = {
 }
 
 const mutations = {
-  SET_SELECTED_MENU (state, payload) {
+  SET_SELECTED_MENU(state, payload) {
     state.selectedMenu = payload
   }
 }
@@ -13,7 +13,7 @@ const mutations = {
 const actions = {}
 
 const getters = {
-  selectedMenu: state => state.selectedMenu
+  selectedMenu: (state) => state.selectedMenu
 }
 
 export default {

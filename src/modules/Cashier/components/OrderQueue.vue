@@ -2,7 +2,12 @@
   <div class="order-queue component-padding-top horizontal-scroll">
     <h3 class="site-title">Order Queue</h3>
     <div class="queue-cards">
-      <div class="card order-card" v-for="item in items" :key="item.id" @click="$emit('select-item', item)">
+      <div
+        class="card order-card"
+        v-for="item in items"
+        :key="item.id"
+        @click="$emit('select-item', item)"
+      >
         <h1 class="mt-2">{{ item.order_number }}</h1>
         <component :is="`icon-${item.type}`" />
         <div class="price">
@@ -17,13 +22,17 @@
             />
           </p>
         </div>
-        <hr>
+        <hr />
         <div class="card-cta">
-          <el-button type="danger" plain @click.stop="cancelOrder(item)"><i class="el-icon-close"></i></el-button>
-          <el-button type="success" plain @click.stop="setOrderDone(item)"><i class="el-icon-check"></i></el-button>
+          <el-button type="danger" plain @click.stop="cancelOrder(item)"
+            ><i class="el-icon-close"></i
+          ></el-button>
+          <el-button type="success" plain @click.stop="setOrderDone(item)"
+            ><i class="el-icon-check"></i
+          ></el-button>
         </div>
       </div>
-      <div class="scroll-fader" style="height: 270px;" />
+      <div class="scroll-fader" style="height: 270px" />
     </div>
   </div>
 </template>
@@ -44,43 +53,51 @@ export default {
     VueNumeric
   },
   computed: {
-    orderItems () {
+    orderItems() {
       return this.$store.getters['cashier/orderItems']
     }
   },
-  created () {
+  created() {
     console.log('items: ', this.items)
   },
   methods: {
-    setOrderDone (item) {
+    setOrderDone(item) {
       this.$confirm('Are you sure this order is done?', 'Warning', {
         confirmButtonText: 'Yes',
         cancelButtonText: 'No',
         type: 'warning'
-      }).then(async () => {
-        item.status = 'done'
-        const { response: { data } } = await Order.api().updateOrder(item)
-        Order.insertOrUpdate(data)
-        this.$message({
-          type: 'success',
-          message: 'Order updated successfully!'
+      })
+        .then(async () => {
+          item.status = 'done'
+          const {
+            response: { data }
+          } = await Order.api().updateOrder(item)
+          Order.insertOrUpdate(data)
+          this.$message({
+            type: 'success',
+            message: 'Order updated successfully!'
+          })
         })
-      }).catch(() => {})
+        .catch(() => {})
     },
-    cancelOrder (item) {
+    cancelOrder(item) {
       this.$confirm('Are you sure you want to cancel this order?', 'Warning', {
         confirmButtonText: 'Yes',
         cancelButtonText: 'No',
         type: 'warning'
-      }).then(async () => {
-        item.status = 'cancelled'
-        const { response: { data } } = await Order.api().updateOrder(item)
-        Order.insertOrUpdate(data)
-        this.$message({
-          type: 'success',
-          message: 'Order cancelled successfully!'
+      })
+        .then(async () => {
+          item.status = 'cancelled'
+          const {
+            response: { data }
+          } = await Order.api().updateOrder(item)
+          Order.insertOrUpdate(data)
+          this.$message({
+            type: 'success',
+            message: 'Order cancelled successfully!'
+          })
         })
-      }).catch(() => {})
+        .catch(() => {})
     }
   }
 }

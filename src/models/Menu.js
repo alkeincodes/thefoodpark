@@ -10,20 +10,20 @@ export default class Menu extends Base {
       fetch: {
         url: '',
         dataKey: 'data',
-        dataTransformer: response => {
+        dataTransformer: (response) => {
           return response.data || []
         }
       },
-      createMenu (params) {
+      createMenu(params) {
         return this.post('', params)
       },
-      deleteMenu (params) {
+      deleteMenu(params) {
         return this.delete(`/${params.id}`, params)
       }
     }
   }
 
-  static fields () {
+  static fields() {
     return {
       id: this.attr(null),
       category_id: this.attr(null),

@@ -8,9 +8,10 @@
         :type="item.status === 'done' ? 'success' : 'danger'"
         plain
       >
-        <i :class="`el-icon-${item.status === 'done' ? 'check' : 'close'}`"></i> {{ item.order_number }}
+        <i :class="`el-icon-${item.status === 'done' ? 'check' : 'close'}`"></i>
+        {{ item.order_number }}
       </el-button>
-      <div class="scroll-fader" style="height: 60px;" />
+      <div class="scroll-fader" style="height: 60px" />
     </div>
   </div>
 </template>
@@ -25,7 +26,7 @@ export default {
     }
   },
   computed: {
-    orderItems () {
+    orderItems() {
       return this.$store.getters['cashier/orderItems']
     }
   }

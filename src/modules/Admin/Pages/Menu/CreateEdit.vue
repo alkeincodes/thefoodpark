@@ -32,18 +32,30 @@
         </div>
       </el-form-item>
       <el-form-item>
-        <input type="file" class="form-control-file" id="book_cover" name="selected_cover" @change="onFileChange">
+        <input
+          type="file"
+          class="form-control-file"
+          id="book_cover"
+          name="selected_cover"
+          @change="onFileChange"
+        />
         <p class="text-hint">Image preview will show below.</p>
         <div v-if="typeof ruleForm.image == 'object'">
           <img v-if="imageUrl" :src="imageUrl" height="150" width="150" />
         </div>
         <div v-else>
-          <img :src="`${sourceUrl}/menus/${ruleForm.image}`" height="150" width="150" />
+          <img
+            :src="`${sourceUrl}/menus/${ruleForm.image}`"
+            height="150"
+            width="150"
+          />
         </div>
       </el-form-item>
       <el-form-item>
         <el-button @click="$emit('cancel')">Cancel</el-button>
-        <el-button type="primary" :loading="isSaving" @click="createMenu">Confirm</el-button>
+        <el-button type="primary" :loading="isSaving" @click="createMenu"
+          >Confirm</el-button
+        >
       </el-form-item>
     </el-form>
   </div>
@@ -70,17 +82,17 @@ export default {
     VueNumeric
   },
   computed: {
-    categories () {
+    categories() {
       return Category.all()
     },
-    toEditMenu () {
+    toEditMenu() {
       return this.$store.getters['admin/selectedMenu']
     }
   },
   watch: {
     // watch if selected food menu is changed
     toEditMenu: {
-      handler (val) {
+      handler(val) {
         if (val) {
           this.ruleForm = val
         }
@@ -89,7 +101,7 @@ export default {
       immediate: true
     },
     // watch modalAction value and assign the correct data value
-    modalAction (val) {
+    modalAction(val) {
       if (val === 'edit') {
         this.ruleForm = this.toEditMenu
       } else {
@@ -97,7 +109,7 @@ export default {
       }
     }
   },
-  data () {
+  data() {
     return {
       isSaving: false,
       imageUrl: null,
@@ -109,16 +121,24 @@ export default {
       },
       rules: {
         category_id: [
-          { required: true, message: 'Please select a category', trigger: 'blur' }
+          {
+            required: true,
+            message: 'Please select a category',
+            trigger: 'blur'
+          }
         ],
         name: [
-          { required: true, message: 'Please enter a Product Name', trigger: 'blur' }
+          {
+            required: true,
+            message: 'Please enter a Product Name',
+            trigger: 'blur'
+          }
         ]
       }
     }
   },
   methods: {
-    createMenu () {
+    createMenu() {
       this.isSaving = true
       this.$refs.ruleForm.validate(async (valid) => {
         if (valid) {
@@ -154,12 +174,12 @@ export default {
         }
       })
     },
-    onFileChange (e) {
+    onFileChange(e) {
       const file = e.target.files[0]
       this.imageUrl = URL.createObjectURL(file)
       this.ruleForm.image = file
     },
-    resetForm () {
+    resetForm() {
       this.ruleForm = {
         category_id: null,
         name: '',

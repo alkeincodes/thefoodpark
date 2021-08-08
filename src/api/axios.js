@@ -6,7 +6,7 @@ const instance = axios.create({
   baseURL: `${process.env.VUE_APP_API_URL}/api`
 })
 
-instance.interceptors.request.use(req => {
+instance.interceptors.request.use((req) => {
   const token = localStorage.getItem('token')
   req.headers.accept = 'application/json'
 

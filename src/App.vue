@@ -7,10 +7,9 @@
 </template>
 
 <script>
-
 export default {
   name: 'App',
-  mounted () {
+  mounted() {
     console.log('@VUE_APP_API_URL: ', process.env.VUE_APP_API_URL)
 
     // this is to set the prefix of the order number
@@ -27,5 +26,5 @@ export default {
 </script>
 
 <style lang="scss">
-  @import '@/scss/app.scss';
+@import '@/scss/app.scss';
 </style>

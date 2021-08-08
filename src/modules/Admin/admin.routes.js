@@ -1,7 +1,19 @@
-const Index = () => import(/* webpackChunkName: "admin-index" */ '@/modules/Admin/Index')
-const Home = () => import(/* webpackChunkName: "admin-home" */ '@/modules/Admin/Pages/Home')
-const MenuIndex = () => import(/* webpackChunkName: "menu-index" */ '@/modules/Admin/Pages/Menu/Index')
-const CreateEdit = () => import(/* webpackChunkName: "create-menu" */ '@/modules/Admin/Pages/Menu/CreateEdit')
+const Index = () =>
+  import(/* webpackChunkName: "admin-index" */ '@/modules/Admin/Index')
+const Home = () =>
+  import(/* webpackChunkName: "admin-home" */ '@/modules/Admin/Pages/Home')
+const MenuIndex = () =>
+  import(
+    /* webpackChunkName: "menu-index" */ '@/modules/Admin/Pages/Menu/Index'
+  )
+const CreateEdit = () =>
+  import(
+    /* webpackChunkName: "create-menu" */ '@/modules/Admin/Pages/Menu/CreateEdit'
+  )
+const Category = () =>
+  import(
+    /* webpackChunkName: "create-menu" */ '@/modules/Admin/Pages/Category/Index'
+  )
 
 export default [
   {
@@ -55,6 +67,14 @@ export default [
             }
           }
         ]
+      },
+      {
+        path: '/categories',
+        name: 'Categories',
+        component: Category,
+        meta: {
+          navName: 'Categories'
+        }
       }
     ]
   }

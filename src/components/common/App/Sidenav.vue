@@ -1,18 +1,19 @@
 <template>
   <aside
     class="sidenav"
-    :class="{open: isHover}"
+    :class="{ open: isHover }"
     @mouseenter="isHover = true"
     @mouseleave="isHover = false"
   >
     <div class="sidenav__logo mb-4 mt-4">
-      <img src="@/assets/the_food_park_logo.png">
+      <img src="@/assets/the_food_park_logo.png" />
     </div>
     <ul class="sidenav__link mt-4">
       <template v-for="(item, key) in routeLinks.children">
         <li v-if="!item.meta.isHidden" :key="key">
           <router-link :to="{ name: item.name }">
-            <component :is="`icon-${item.meta.icon}`"></component> <span>{{ item.meta.navName }}</span>
+            <component :is="`icon-${item.meta.icon}`"></component>
+            <span>{{ item.meta.navName }}</span>
           </router-link>
           <!-- <el-collapse v-else v-model="activeCollapse">
             <el-collapse-item name="1">
@@ -36,18 +37,21 @@
 <script>
 export default {
   name: 'Sidenav',
-  data () {
+  data() {
     return {
       isHover: false,
       activeCollapse: ['1']
     }
   },
   computed: {
-    routeLinks () {
+    routeLinks() {
       const userRole = this.$store.getters['auth/user'].role || null
       let routes = []
 
-      if (userRole) routes = this.$router.options.routes.find(({ name }) => name === userRole)
+      if (userRole)
+        routes = this.$router.options.routes.find(
+          ({ name }) => name === userRole
+        )
 
       return routes
     }

@@ -27,22 +27,22 @@ export const adminRouteGuard = async (to, from, next) => {
   }
 }
 
-export const addGuardstoRoutes = routes =>
-  routes.map(r => {
+export const addGuardstoRoutes = (routes) =>
+  routes.map((r) => {
     r.beforeEnter = multiguard([authRouteGuard])
     r.props = true
     return r
   })
 
-export const addCashierGuardToRoutes = routes =>
-  routes.map(r => {
+export const addCashierGuardToRoutes = (routes) =>
+  routes.map((r) => {
     r.beforeEnter = multiguard([authRouteGuard, cashierRouteGuard])
     r.props = true
     return r
   })
 
-export const addAdminGuardToRoutes = routes =>
-  routes.map(r => {
+export const addAdminGuardToRoutes = (routes) =>
+  routes.map((r) => {
     r.beforeEnter = multiguard([authRouteGuard, adminRouteGuard])
     r.props = true
     return r

@@ -9,14 +9,14 @@ export default class OrderItem extends Base {
       fetch: {
         url: '',
         dataKey: 'data',
-        dataTransformer: response => {
+        dataTransformer: (response) => {
           return response.data || []
         }
       }
     }
   }
 
-  static fields () {
+  static fields() {
     return {
       id: this.attr(null),
       name: this.attr(null),

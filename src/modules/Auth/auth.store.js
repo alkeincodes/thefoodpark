@@ -1,4 +1,3 @@
-
 import axios from '@/api/axios'
 import router from '@/router'
 
@@ -10,16 +9,16 @@ const state = {
 }
 
 const mutations = {
-  SET_USER (state, payload) {
+  SET_USER(state, payload) {
     state.user = payload
   },
-  SET_AUTHENTICATED (state, value) {
+  SET_AUTHENTICATED(state, value) {
     state.authenticated = value
   }
 }
 
 const actions = {
-  logout ({ dispatch }) {
+  logout({ dispatch }) {
     console.log('logout')
     axios.post('/logout').then(async () => {
       localStorage.removeItem('token')
@@ -27,23 +26,26 @@ const actions = {
       router.push('/')
     })
   },
-  async authenticate ({ state, commit }) {
-    return axios.get('/user').then(({ data }) => {
-      commit('SET_AUTHENTICATED', true)
-      commit('SET_USER', data)
+  async authenticate({ state, commit }) {
+    return axios
+      .get('/user')
+      .then(({ data }) => {
+        commit('SET_AUTHENTICATED', true)
+        commit('SET_USER', data)
 
-      return true
-    }).catch(() => {
-      commit('SET_AUTHENTICATED', false)
-      commit('SET_USER', null)
-      return false
-    })
+        return true
+      })
+      .catch(() => {
+        commit('SET_AUTHENTICATED', false)
+        commit('SET_USER', null)
+        return false
+      })
   }
 }
 
 const getters = {
-  user: state => state.user,
-  authenticated: state => state.authenticated
+  user: (state) => state.user,
+  authenticated: (state) => state.authenticated
 }
 
 export default {

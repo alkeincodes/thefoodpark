@@ -36,5 +36,5 @@ export const set = (target, property, value) => {
 }
 
 export const finalPrice = (price, offSale) => {
-  return `P${parseInt(price - (price * (offSale / 100))).toFixed(2)}`
+  return `P${parseInt(price - price * (offSale / 100)).toFixed(2)}`
 }

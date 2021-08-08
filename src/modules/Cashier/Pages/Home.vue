@@ -12,14 +12,22 @@
         />
         <el-dropdown trigger="click">
           <span class="el-dropdown-link">
-            <img src="@/assets/prof.jpg" alt="Profile Picture">
+            <img src="@/assets/prof.jpg" alt="Profile Picture" />
           </span>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item @click.native="$store.dispatch('auth/logout')"><span class="text--danger">Logout</span></el-dropdown-item>
+            <el-dropdown-item @click.native="$store.dispatch('auth/logout')"
+              ><span class="text--danger">Logout</span></el-dropdown-item
+            >
           </el-dropdown-menu>
         </el-dropdown>
       </div>
-      <el-button type="primary" class="mt-4" icon="el-icon-plus" @click="$router.push({ name: 'NewOrder' })">New Order</el-button>
+      <el-button
+        type="primary"
+        class="mt-4"
+        icon="el-icon-plus"
+        @click="$router.push({ name: 'NewOrder' })"
+        >New Order</el-button
+      >
       <order-list v-if="processedOrder.length" :items="processedOrder" />
       <order-queue
         v-if="queuedOrderItems.length"
@@ -29,43 +37,48 @@
       <!-- <order-delivery /> -->
 
       <!-- SHOW ORDER -->
-    <el-dialog :title="`Selected Order: ${selectedOrder.order_number}`" :visible.sync="isShowOrder">
-      <h1 class="mb-2">Order Number: {{ selectedOrder.order_number }}</h1>
-      <h2 class="mb-2">Table Number: {{ selectedOrder.table_number }}</h2>
-      <h3 class="mb-2">Total Price:
-        <vue-numeric
-          :value="selectedOrder.total_price"
-          currency="₱"
-          separator=","
-          :precision="2"
-          read-only
-        />
-      </h3>
-      <h3 class="mb-2">Change:
-        <vue-numeric
-          :value="selectedOrder.received_cash - selectedOrder.total_price"
-          currency="₱"
-          separator=","
-          :precision="2"
-          read-only
-        />
-      </h3>
-      <el-table :data="selectedOrder.order_items">
-        <el-table-column label="Name" prop="name"></el-table-column>
-        <el-table-column label="Price">
-          <template slot-scope="props">
-            <vue-numeric
-              :value="props.row.price"
-              currency="₱"
-              separator=","
-              :precision="2"
-              read-only
-            />
-          </template>
-        </el-table-column>
-        <el-table-column label="Quantity" prop="quantity"></el-table-column>
-      </el-table>
-    </el-dialog>
+      <el-dialog
+        :title="`Selected Order: ${selectedOrder.order_number}`"
+        :visible.sync="isShowOrder"
+      >
+        <h1 class="mb-2">Order Number: {{ selectedOrder.order_number }}</h1>
+        <h2 class="mb-2">Table Number: {{ selectedOrder.table_number }}</h2>
+        <h3 class="mb-2">
+          Total Price:
+          <vue-numeric
+            :value="selectedOrder.total_price"
+            currency="₱"
+            separator=","
+            :precision="2"
+            read-only
+          />
+        </h3>
+        <h3 class="mb-2">
+          Change:
+          <vue-numeric
+            :value="selectedOrder.received_cash - selectedOrder.total_price"
+            currency="₱"
+            separator=","
+            :precision="2"
+            read-only
+          />
+        </h3>
+        <el-table :data="selectedOrder.order_items">
+          <el-table-column label="Name" prop="name"></el-table-column>
+          <el-table-column label="Price">
+            <template slot-scope="props">
+              <vue-numeric
+                :value="props.row.price"
+                currency="₱"
+                separator=","
+                :precision="2"
+                read-only
+              />
+            </template>
+          </el-table-column>
+          <el-table-column label="Quantity" prop="quantity"></el-table-column>
+        </el-table>
+      </el-dialog>
     </div>
   </div>
 </template>
@@ -93,28 +106,36 @@ export default {
     VueNumeric
   },
   computed: {
-    queuedOrderItems () {
-      return Order.query().where('status', 'preparing').with('order_items').get()
+    queuedOrderItems() {
+      return Order.query()
+        .where('status', 'preparing')
+        .with('order_items')
+        .get()
     },
-    processedOrder () {
-      return Order.query().where('status', 'done').orWhere('status', 'cancelled').get()
+    processedOrder() {
+      return Order.query()
+        .where('status', 'done')
+        .orWhere('status', 'cancelled')
+        .get()
     },
-    selectedOrder () {
+    selectedOrder() {
       return this.$store.getters['cashier/selectedOrder']
     }
   },
-  data () {
+  data() {
     return {
       search: '',
       isShowOrder: false
     }
   },
-  async mounted () {
-    const { response: { data } } = await Order.api().fetch()
+  async mounted() {
+    const {
+      response: { data }
+    } = await Order.api().fetch()
     Order.insertOrUpdate({ data })
   },
   methods: {
-    selectOrder (item) {
+    selectOrder(item) {
       this.$store.commit('cashier/SET_SELECTED_ORDER', item)
       this.isShowOrder = true
     }

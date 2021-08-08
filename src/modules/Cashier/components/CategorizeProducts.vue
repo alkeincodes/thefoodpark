@@ -2,14 +2,13 @@
   <div class="products">
     <div class="products__list">
       <div
-        v-for="(item, key) in data.menus.filter(m => m.name.toLowerCase().includes(searchMenu.toLowerCase()))"
+        v-for="(item, key) in data.menus.filter((m) =>
+          m.name.toLowerCase().includes(searchMenu.toLowerCase())
+        )"
         :key="key"
         class="product-menu"
       >
-        <h3
-          v-if="key == 0"
-          class="mb-4 category-name"
-        >
+        <h3 v-if="key == 0" class="mb-4 category-name">
           {{ data.name }}
         </h3>
         <img
@@ -17,7 +16,7 @@
           alt="Image Title"
           class="product-menu__image"
           @click="$emit('select-menu', item)"
-        >
+        />
         <div class="product-menu__info">
           <h3>{{ item.name }}</h3>
           <p>
@@ -48,7 +47,7 @@ export default {
   },
   components: { VueNumeric },
   computed: {
-    searchMenu () {
+    searchMenu() {
       return this.$store.getters['cashier/searchMenu']
     }
   }

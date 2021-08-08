@@ -1,6 +1,11 @@
-const Index = () => import(/* webpackChunkName: "cashier-index" */ '@/modules/Cashier/Index')
-const Home = () => import(/* webpackChunkName: "cashier-home" */ '@/modules/Cashier/Pages/Home')
-const NewOrder = () => import(/* webpackChunkName: "cashier-order" */ '@/modules/Cashier/Pages/Order')
+const Index = () =>
+  import(/* webpackChunkName: "cashier-index" */ '@/modules/Cashier/Index')
+const Home = () =>
+  import(/* webpackChunkName: "cashier-home" */ '@/modules/Cashier/Pages/Home')
+const NewOrder = () =>
+  import(
+    /* webpackChunkName: "cashier-order" */ '@/modules/Cashier/Pages/Order'
+  )
 
 export default [
   {
@@ -10,7 +15,7 @@ export default [
     children: [
       {
         path: '/',
-        name: 'Home',
+        name: 'cashier',
         component: Home,
         meta: {
           icon: 'home',

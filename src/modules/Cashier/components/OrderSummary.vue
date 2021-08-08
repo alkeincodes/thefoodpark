@@ -14,15 +14,8 @@
         type="number"
       />
       <p class="text-hint mt-1 mb-4">Automatically prefix with 'Table'</p>
-      <el-table
-        :data="orderedItems"
-        style="width: 100%"
-      >
-        <el-table-column
-          prop="name"
-          label="Name"
-        >
-        </el-table-column>
+      <el-table :data="orderedItems" style="width: 100%">
+        <el-table-column prop="name" label="Name"> </el-table-column>
         <el-table-column label="Price">
           <template slot-scope="props">
             <vue-numeric
@@ -34,10 +27,16 @@
             />
           </template>
         </el-table-column>
-        <el-table-column label="Quantity" align="center" >
+        <el-table-column label="Quantity" align="center">
           <template slot-scope="props">
-            <el-input v-if="toggleQtyEdit" @blur="toggleQtyEdit = false" v-model="props.row.quantity" />
-            <span v-else @click="toggleQtyEdit = true">{{ props.row.quantity }}</span>
+            <el-input
+              v-if="toggleQtyEdit"
+              @blur="toggleQtyEdit = false"
+              v-model="props.row.quantity"
+            />
+            <span v-else @click="toggleQtyEdit = true">{{
+              props.row.quantity
+            }}</span>
           </template>
         </el-table-column>
         <el-table-column label="Total">
@@ -54,7 +53,16 @@
         </el-table-column>
         <el-table-column width="50">
           <template slot-scope="props">
-            <el-button size="mini" type="danger" @click="$store.commit('cashier/REMOVE_ORDERED_ITEM', props.row.id)" icon="el-icon-delete" circle plain />
+            <el-button
+              size="mini"
+              type="danger"
+              @click="
+                $store.commit('cashier/REMOVE_ORDERED_ITEM', props.row.id)
+              "
+              icon="el-icon-delete"
+              circle
+              plain
+            />
           </template>
         </el-table-column>
       </el-table>
@@ -65,13 +73,15 @@
         <vue-numeric
           v-model="receivedCash"
           class="el-input mt-4"
-          :class="{error: receivedCashError}"
+          :class="{ error: receivedCashError }"
           currency="₱"
           separator=","
           :precision="2"
           @blur="checkCash"
         />
-        <p class="text-hint text--danger mt-1" v-if="receivedCashError">{{ receivedCashError }}</p>
+        <p class="text-hint text--danger mt-1" v-if="receivedCashError">
+          {{ receivedCashError }}
+        </p>
       </div>
       <div class="order-summary-overall">
         <h1>Total:</h1>
@@ -99,7 +109,14 @@
       </div>
       <div class="order-summary-cta">
         <el-button type="danger" plain @click="cancelOrder">CANCEL</el-button>
-        <el-button type="primary" :disabled="receivedCash <= 0 || !tableNumber || orderedItems.length == 0" @click="checkout">CHECKOUT</el-button>
+        <el-button
+          type="primary"
+          :disabled="
+            receivedCash <= 0 || !tableNumber || orderedItems.length == 0
+          "
+          @click="checkout"
+          >CHECKOUT</el-button
+        >
       </div>
     </div>
   </div>
@@ -119,19 +136,19 @@ export default {
   },
   components: { VueNumeric },
   computed: {
-    orderedItems () {
+    orderedItems() {
       return this.$store.getters['cashier/orderedItems']
     },
-    overAllTotal () {
+    overAllTotal() {
       return this.orderedItems.reduce((total, item) => {
-        return total + (item.price * item.quantity)
+        return total + item.price * item.quantity
       }, 0)
     },
-    cashChange () {
+    cashChange() {
       return this.receivedCash - this.overAllTotal
     }
   },
-  data () {
+  data() {
     return {
       orderType: 'dine-in',
       receivedCash: 0,
@@ -141,15 +158,17 @@ export default {
     }
   },
   watch: {
-    receivedCash (val) {
+    receivedCash(val) {
       if (val > 0) this.receivedCashError = null
     }
   },
   methods: {
-    checkCash () {
-      if (this.receivedCash < this.overAllTotal) this.receivedCashError = 'The received cash is less than the overall total'
+    checkCash() {
+      if (this.receivedCash < this.overAllTotal)
+        this.receivedCashError =
+          'The received cash is less than the overall total'
     },
-    checkout () {
+    checkout() {
       const newOrderCounter = +localStorage.getItem('order_counter') + 1
       const str = '' + newOrderCounter
       const pad = '0000'
@@ -160,45 +179,51 @@ export default {
           confirmButtonText: 'Yes',
           cancelButtonText: 'No',
           type: 'warning'
-        }).then(async () => {
-          // logic for checkout
-          const order = {
-            cashier_id: this.$store.getters['auth/user'].id,
-            ordered_items: this.orderedItems,
-            received_cash: this.receivedCash,
-            total_price: this.overAllTotal,
-            type: this.orderType,
-            order_number: `#${padNumber}`,
-            table_number: this.tableNumber
-          }
-
-          const { response: { data } } = await Order.api().createOrder(order)
-          Order.insertOrUpdate(data)
-
-          // update order counter
-          localStorage.setItem('order_counter', newOrderCounter)
-
-          this.$router.push({ name: 'Home' })
-          this.$store.commit('cashier/CLEAR_ORDERED_ITEMS')
-
-          this.$message({
-            type: 'success',
-            message: 'New Order Created Successfully!'
-          })
-        }).catch((e) => {
-          console.error(e.response.data.errors)
-          this.$message({
-            type: 'error',
-            message: 'Something went wrong!'
-          })
-        }).finally(() => {
-          this.receivedCashError = null
         })
+          .then(async () => {
+            // logic for checkout
+            const order = {
+              cashier_id: this.$store.getters['auth/user'].id,
+              ordered_items: this.orderedItems,
+              received_cash: this.receivedCash,
+              total_price: this.overAllTotal,
+              type: this.orderType,
+              order_number: `#${padNumber}`,
+              table_number: this.tableNumber
+            }
+
+            const {
+              response: { data }
+            } = await Order.api().createOrder(order)
+            Order.insertOrUpdate(data)
+
+            // update order counter
+            localStorage.setItem('order_counter', newOrderCounter)
+
+            this.$router.push({ name: 'Home' })
+            this.$store.commit('cashier/CLEAR_ORDERED_ITEMS')
+
+            this.$message({
+              type: 'success',
+              message: 'New Order Created Successfully!'
+            })
+          })
+          .catch((e) => {
+            console.error(e.response.data.errors)
+            this.$message({
+              type: 'error',
+              message: 'Something went wrong!'
+            })
+          })
+          .finally(() => {
+            this.receivedCashError = null
+          })
       } else {
-        this.receivedCashError = 'The received cash is less than the overall total'
+        this.receivedCashError =
+          'The received cash is less than the overall total'
       }
     },
-    cancelOrder () {
+    cancelOrder() {
       this.$store.commit('cashier/CLEAR_ORDERED_ITEMS')
       this.$router.push({ name: 'Home' })
     }

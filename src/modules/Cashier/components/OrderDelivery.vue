@@ -1,11 +1,7 @@
 <template>
   <div class="component-padding-top">
     <h3 class="site-title">Delivery</h3>
-    <el-table
-      :data="data"
-      class="responsive-table"
-      style="width: 100%"
-    >
+    <el-table :data="data" class="responsive-table" style="width: 100%">
       <el-table-column label="Customer">
         <template slot-scope="prop">
           <div class="cell-name">Customer</div>
@@ -38,7 +34,7 @@
             :class="{
               'text--success': prop.row.status == 'done',
               'text--warning': prop.row.status == 'preparing',
-              'text--primary': prop.row.status == 'delivering',
+              'text--primary': prop.row.status == 'delivering'
             }"
           >
             {{ prop.row.status }}
@@ -55,7 +51,7 @@ import TableResizeMixin from '@/utils/table.mixin'
 export default {
   name: 'OrderDelivery',
   mixins: [TableResizeMixin],
-  data () {
+  data() {
     return {
       data: [
         {
@@ -93,7 +89,7 @@ export default {
       ]
     }
   },
-  created () {
+  created() {
     this.$nextTick(() => {
       this.resizeTableRow()
     })
