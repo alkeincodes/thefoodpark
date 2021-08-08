@@ -21,10 +21,10 @@ export default {
     AppHeader,
     Sidenav
   },
-  created() {
+  created () {
     console.log('route: ', this.$route)
   },
-  async mounted() {
+  async mounted () {
     await Menu.api().fetch()
     await Category.api().fetch()
   }

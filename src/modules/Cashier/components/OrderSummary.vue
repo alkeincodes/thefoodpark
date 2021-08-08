@@ -34,9 +34,7 @@
               @blur="toggleQtyEdit = false"
               v-model="props.row.quantity"
             />
-            <span v-else @click="toggleQtyEdit = true">{{
-              props.row.quantity
-            }}</span>
+            <span v-else @click="toggleQtyEdit = true">{{ props.row.quantity }}</span>
           </template>
         </el-table-column>
         <el-table-column label="Total">
@@ -56,9 +54,7 @@
             <el-button
               size="mini"
               type="danger"
-              @click="
-                $store.commit('cashier/REMOVE_ORDERED_ITEM', props.row.id)
-              "
+              @click="$store.commit('cashier/REMOVE_ORDERED_ITEM', props.row.id)"
               icon="el-icon-delete"
               circle
               plain
@@ -97,13 +93,7 @@
           </h1>
           <p class="text-hint" v-if="cashChange > 0">
             Change:
-            <vue-numeric
-              :value="cashChange"
-              currency="₱"
-              separator=","
-              :precision="2"
-              read-only
-            />
+            <vue-numeric :value="cashChange" currency="₱" separator="," :precision="2" read-only />
           </p>
         </div>
       </div>
@@ -111,9 +101,7 @@
         <el-button type="danger" plain @click="cancelOrder">CANCEL</el-button>
         <el-button
           type="primary"
-          :disabled="
-            receivedCash <= 0 || !tableNumber || orderedItems.length == 0
-          "
+          :disabled="receivedCash <= 0 || !tableNumber || orderedItems.length == 0"
           @click="checkout"
           >CHECKOUT</el-button
         >
@@ -136,19 +124,19 @@ export default {
   },
   components: { VueNumeric },
   computed: {
-    orderedItems() {
+    orderedItems () {
       return this.$store.getters['cashier/orderedItems']
     },
-    overAllTotal() {
+    overAllTotal () {
       return this.orderedItems.reduce((total, item) => {
         return total + item.price * item.quantity
       }, 0)
     },
-    cashChange() {
+    cashChange () {
       return this.receivedCash - this.overAllTotal
     }
   },
-  data() {
+  data () {
     return {
       orderType: 'dine-in',
       receivedCash: 0,
@@ -158,17 +146,15 @@ export default {
     }
   },
   watch: {
-    receivedCash(val) {
+    receivedCash (val) {
       if (val > 0) this.receivedCashError = null
     }
   },
   methods: {
-    checkCash() {
-      if (this.receivedCash < this.overAllTotal)
-        this.receivedCashError =
-          'The received cash is less than the overall total'
+    checkCash () {
+      if (this.receivedCash < this.overAllTotal) { this.receivedCashError = 'The received cash is less than the overall total' }
     },
-    checkout() {
+    checkout () {
       const newOrderCounter = +localStorage.getItem('order_counter') + 1
       const str = '' + newOrderCounter
       const pad = '0000'
@@ -219,11 +205,10 @@ export default {
             this.receivedCashError = null
           })
       } else {
-        this.receivedCashError =
-          'The received cash is less than the overall total'
+        this.receivedCashError = 'The received cash is less than the overall total'
       }
     },
-    cancelOrder() {
+    cancelOrder () {
       this.$store.commit('cashier/CLEAR_ORDERED_ITEMS')
       this.$router.push({ name: 'Home' })
     }

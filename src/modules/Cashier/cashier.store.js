@@ -10,30 +10,30 @@ const state = {
 }
 
 const mutations = {
-  SET_SELECTED_MENU(state, payload) {
+  SET_SELECTED_MENU (state, payload) {
     state.selectedMenu = payload
   },
-  SET_ORDERED_ITEMS(state, quantity) {
+  SET_ORDERED_ITEMS (state, quantity) {
     const order = {
       ...state.selectedMenu,
       quantity
     }
     state.orderedItems.push(order)
   },
-  CLEAR_ORDERED_ITEMS(state) {
+  CLEAR_ORDERED_ITEMS (state) {
     state.orderedItems = []
   },
-  REMOVE_ORDERED_ITEM(state, itemId) {
+  REMOVE_ORDERED_ITEM (state, itemId) {
     const index = state.orderedItems.findIndex(({ id }) => id === itemId)
 
     console.log('index', index)
 
     state.orderedItems.splice(index, 1)
   },
-  SET_SELECTED_ORDER(state, payload) {
+  SET_SELECTED_ORDER (state, payload) {
     state.selectedOrder = payload
   },
-  SET_SEARCH_MENU(state, payload) {
+  SET_SEARCH_MENU (state, payload) {
     state.searchMenu = payload
   }
 }

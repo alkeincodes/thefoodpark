@@ -5,16 +5,13 @@ module.exports = {
   },
   extends: [
     'plugin:vue/essential',
-    '@vue/standard',
-    'plugin:prettier/recommended'
+    '@vue/standard'
   ],
-  plugins: ['prettier'],
-  rules: {
-    'prettier/prettier': ['error', { endOfLine: 'auto' }],
-    'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off'
-  },
   parserOptions: {
     parser: 'babel-eslint'
+  },
+  rules: {
+    'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off'
   }
 }

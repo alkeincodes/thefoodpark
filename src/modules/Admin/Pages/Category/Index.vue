@@ -5,8 +5,7 @@
 
     <el-table :data="categories" class="mt-4" style="width: 100%">
       <el-table-column prop="name" label="Name" width="180"> </el-table-column>
-      <el-table-column prop="description" label="Desription" width="180">
-      </el-table-column>
+      <el-table-column prop="description" label="Desription" width="180"> </el-table-column>
       <el-table-column label="Actions">
         <template slot-scope="props">
           <el-button
@@ -29,11 +28,7 @@
       </el-table-column>
     </el-table>
 
-    <el-dialog
-      :title="`${modalAction} Menu`"
-      :visible.sync="showModal"
-      width="30%"
-    >
+    <el-dialog :title="`${modalAction} Menu`" :visible.sync="showModal" width="30%">
       <create-edit
         :modal-action="modalAction"
         @cancel="showModal = false"
@@ -50,24 +45,24 @@ import CreateEdit from '@/modules/Admin/Pages/Category/CreateEdit'
 export default {
   name: 'Category',
   components: { CreateEdit },
-  data() {
+  data () {
     return {
       showModal: false
     }
   },
   computed: {
-    categories() {
+    categories () {
       return Category.all()
     }
   },
-  async created() {
+  async created () {
     await Category.api().fetch()
   },
   methods: {
-    openEditModal() {
+    openEditModal () {
       return null
     },
-    deleteCategory() {
+    deleteCategory () {
       return ''
     }
   }

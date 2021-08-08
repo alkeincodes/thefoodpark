@@ -16,7 +16,7 @@ export default class OrderItem extends Base {
     }
   }
 
-  static fields() {
+  static fields () {
     return {
       id: this.attr(null),
       name: this.attr(null),

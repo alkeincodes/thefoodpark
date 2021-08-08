@@ -20,13 +20,7 @@
         <div class="product-menu__info">
           <h3>{{ item.name }}</h3>
           <p>
-            <vue-numeric
-              :value="item.price"
-              currency="₱"
-              separator=","
-              :precision="2"
-              read-only
-            />
+            <vue-numeric :value="item.price" currency="₱" separator="," :precision="2" read-only />
           </p>
         </div>
       </div>
@@ -47,7 +41,7 @@ export default {
   },
   components: { VueNumeric },
   computed: {
-    searchMenu() {
+    searchMenu () {
       return this.$store.getters['cashier/searchMenu']
     }
   }

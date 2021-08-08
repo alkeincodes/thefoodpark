@@ -53,15 +53,15 @@ export default {
     VueNumeric
   },
   computed: {
-    orderItems() {
+    orderItems () {
       return this.$store.getters['cashier/orderItems']
     }
   },
-  created() {
+  created () {
     console.log('items: ', this.items)
   },
   methods: {
-    setOrderDone(item) {
+    setOrderDone (item) {
       this.$confirm('Are you sure this order is done?', 'Warning', {
         confirmButtonText: 'Yes',
         cancelButtonText: 'No',
@@ -80,7 +80,7 @@ export default {
         })
         .catch(() => {})
     },
-    cancelOrder(item) {
+    cancelOrder (item) {
       this.$confirm('Are you sure you want to cancel this order?', 'Warning', {
         confirmButtonText: 'Yes',
         cancelButtonText: 'No',

@@ -14,16 +14,16 @@ export default class Order extends Base {
           return response.data || []
         }
       },
-      createOrder(params) {
+      createOrder (params) {
         return this.post('', params)
       },
-      updateOrder(params) {
+      updateOrder (params) {
         return this.put(`/orders/${params.id}`, params)
       }
     }
   }
 
-  static fields() {
+  static fields () {
     return {
       id: this.attr(null),
       cashier_id: this.attr(null),

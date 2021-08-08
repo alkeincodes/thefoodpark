@@ -2,11 +2,7 @@ import Vue from 'vue'
 
 // Import all icons
 
-const iconsContext = require.context(
-  './components/icons/',
-  true,
-  /\.(js|vue)$/i
-)
+const iconsContext = require.context('./components/icons/', true, /\.(js|vue)$/i)
 iconsContext.keys().map((key) => {
   const name = key
     .match(/\w+/)[0]

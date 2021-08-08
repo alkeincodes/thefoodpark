@@ -37,21 +37,18 @@
 <script>
 export default {
   name: 'Sidenav',
-  data() {
+  data () {
     return {
       isHover: false,
       activeCollapse: ['1']
     }
   },
   computed: {
-    routeLinks() {
+    routeLinks () {
       const userRole = this.$store.getters['auth/user'].role || null
       let routes = []
 
-      if (userRole)
-        routes = this.$router.options.routes.find(
-          ({ name }) => name === userRole
-        )
+      if (userRole) routes = this.$router.options.routes.find(({ name }) => name === userRole)
 
       return routes
     }

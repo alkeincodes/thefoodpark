@@ -26,7 +26,7 @@ export default {
     }
   },
   computed: {
-    orderItems() {
+    orderItems () {
       return this.$store.getters['cashier/orderItems']
     }
   }

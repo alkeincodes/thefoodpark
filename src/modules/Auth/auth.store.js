@@ -9,16 +9,16 @@ const state = {
 }
 
 const mutations = {
-  SET_USER(state, payload) {
+  SET_USER (state, payload) {
     state.user = payload
   },
-  SET_AUTHENTICATED(state, value) {
+  SET_AUTHENTICATED (state, value) {
     state.authenticated = value
   }
 }
 
 const actions = {
-  logout({ dispatch }) {
+  logout ({ dispatch }) {
     console.log('logout')
     axios.post('/logout').then(async () => {
       localStorage.removeItem('token')
@@ -26,7 +26,7 @@ const actions = {
       router.push('/')
     })
   },
-  async authenticate({ state, commit }) {
+  async authenticate ({ state, commit }) {
     return axios
       .get('/user')
       .then(({ data }) => {

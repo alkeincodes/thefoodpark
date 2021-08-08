@@ -1,11 +1,7 @@
 <template>
   <div class="menu-list">
     <!-- <router-view></router-view> -->
-    <el-button
-      type="primary"
-      icon="el-icon-plus"
-      class="mb-2"
-      @click="openCreateModal"
+    <el-button type="primary" icon="el-icon-plus" class="mb-2" @click="openCreateModal"
       >Create Menu</el-button
     >
     <h1 class="site-title mb-2">Food Menu</h1>
@@ -13,10 +9,7 @@
       <el-table-column prop="name" label="Name" width="180"> </el-table-column>
       <el-table-column label="Image">
         <template slot-scope="props">
-          <img
-            :src="`${sourceUrl}/menus/${props.row.image}`"
-            :alt="props.row.name"
-          />
+          <img :src="`s${sourceUrl}/menus/${props.row.image}`" :alt="props.row.name" />
         </template>
       </el-table-column>
       <el-table-column label="Price">
@@ -57,11 +50,7 @@
       </el-table-column>
     </el-table>
 
-    <el-dialog
-      :title="`${modalAction} Menu`"
-      :visible.sync="showModal"
-      width="30%"
-    >
+    <el-dialog :title="`${modalAction} Menu`" :visible.sync="showModal" width="30%">
       <create-edit
         :modal-action="modalAction"
         :source-url="sourceUrl"
@@ -87,30 +76,30 @@ export default {
     CreateEdit
   },
   computed: {
-    menus() {
+    menus () {
       return Menu.query().with('category').get()
     },
-    sourceUrl() {
+    sourceUrl () {
       return `${process.env.VUE_APP_API_URL}/storage/`
     }
   },
-  data() {
+  data () {
     return {
       showModal: false,
       modalAction: 'create'
     }
   },
   methods: {
-    openCreateModal() {
+    openCreateModal () {
       this.modalAction = 'create'
       this.showModal = !this.showModal
     },
-    openEditModal(item) {
+    openEditModal (item) {
       this.modalAction = 'edit'
       this.$store.commit('admin/SET_SELECTED_MENU', item)
       this.showModal = !this.showModal
     },
-    deleteMenu(item) {
+    deleteMenu (item) {
       this.$confirm('Are you sure?', 'Warning', {
         confirmButtonText: 'Yes',
         cancelButtonText: 'No',

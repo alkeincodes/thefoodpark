@@ -15,9 +15,7 @@
       </el-form-item>
       <el-form-item>
         <el-button @click="$emit('cancel')">Cancel</el-button>
-        <el-button type="primary" :loading="isSaving" @click="createCategory"
-          >Confirm</el-button
-        >
+        <el-button type="primary" :loading="isSaving" @click="createCategory">Confirm</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -39,17 +37,17 @@ export default {
     }
   },
   computed: {
-    categories() {
+    categories () {
       return Category.all()
     },
-    toEditCategory() {
+    toEditCategory () {
       return this.$store.getters['admin/selectedCategory']
     }
   },
   watch: {
     // watch if selected food menu is changed
     toEditCategory: {
-      handler(val) {
+      handler (val) {
         if (val) {
           this.ruleForm = val
         }
@@ -58,7 +56,7 @@ export default {
       immediate: true
     },
     // watch modalAction value and assign the correct data value
-    modalAction(val) {
+    modalAction (val) {
       if (val === 'edit') {
         this.ruleForm = this.toEditMenu
       } else {
@@ -66,7 +64,7 @@ export default {
       }
     }
   },
-  data() {
+  data () {
     return {
       isSaving: false,
       imageUrl: null,
@@ -86,7 +84,7 @@ export default {
     }
   },
   methods: {
-    createCategory() {
+    createCategory () {
       this.isSaving = true
       this.$refs.ruleForm.validate(async (valid) => {
         if (valid) {
@@ -109,7 +107,7 @@ export default {
         }
       })
     },
-    resetForm() {
+    resetForm () {
       this.ruleForm = {
         name: '',
         description: ''

@@ -17,7 +17,7 @@ export default class Category extends Base {
     }
   }
 
-  static fields() {
+  static fields () {
     return {
       id: this.attr(null),
       name: this.attr(null),

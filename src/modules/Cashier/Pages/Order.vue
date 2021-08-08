@@ -15,17 +15,9 @@
     <div class="order-page__right">
       <order-summary />
     </div>
-    <el-dialog
-      id="selected-menu-modal"
-      :visible.sync="isDialogOpen"
-      width="30%"
-      center
-    >
+    <el-dialog id="selected-menu-modal" :visible.sync="isDialogOpen" width="30%" center>
       <div class="selected-menu-item">
-        <img
-          :src="`${filePath}/menus/${selectedMenu.image}`"
-          :alt="selectedMenu.name"
-        />
+        <img :src="`${filePath}/menus/${selectedMenu.image}`" :alt="selectedMenu.name" />
         <div class="selected-menu-item__title mt-2">
           How many
           <strong>
@@ -50,9 +42,7 @@
         <span class="hint">click to edit</span>
       </div>
       <span slot="footer" class="dialog-footer">
-        <el-button type="danger" @click="cancelSelectedOrder" plain
-          >Cancel</el-button
-        >
+        <el-button type="danger" @click="cancelSelectedOrder" plain>Cancel</el-button>
         <el-button type="primary" @click="confirmOrder">Confirm</el-button>
       </span>
     </el-dialog>
@@ -74,7 +64,7 @@ export default {
     OrderSummary,
     VueNumeric
   },
-  data() {
+  data () {
     return {
       isDialogOpen: false,
       quantity: 1,
@@ -83,45 +73,45 @@ export default {
     }
   },
   computed: {
-    foodMenu() {
+    foodMenu () {
       return this.$store.getters['cashier/foodMenu']
     },
-    selectedMenu() {
+    selectedMenu () {
       return this.$store.getters['cashier/selectedMenu']
     },
-    categorizedMenu() {
+    categorizedMenu () {
       return Category.query().with('menus').get()
     },
     searchMenu: {
-      get() {
+      get () {
         return this.$store.getters['cashier/searchMenu']
       },
-      set(val) {
+      set (val) {
         this.$store.commit('cashier/SET_SEARCH_MENU', val)
       }
     }
   },
   methods: {
-    reset() {
+    reset () {
       this.quantity = 1
       this.$store.commit('cashier/SET_SELECTED_MENU', {})
     },
-    selectMenu(item) {
+    selectMenu (item) {
       this.quantity = item.quantity || 1
       this.$store.commit('cashier/SET_SELECTED_MENU', item)
       this.isDialogOpen = !this.isDialogOpen
     },
-    cancelSelectedOrder() {
+    cancelSelectedOrder () {
       this.isDialogOpen = false
       this.reset()
     },
-    confirmOrder() {
+    confirmOrder () {
       this.$store.commit('cashier/SET_ORDERED_ITEMS', this.quantity)
       this.isDialogOpen = false
       this.reset()
     }
   },
-  async created() {
+  async created () {
     await Category.api().fetch()
   }
 }

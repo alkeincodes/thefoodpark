@@ -15,12 +15,12 @@
 <script>
 export default {
   name: 'AdminHome',
-  data() {
+  data () {
     return {
       orders: []
     }
   },
-  created() {
+  created () {
     this.axios.get('/admin/orders-by-food').then(({ data }) => {
       this.orders = data
     })

@@ -106,36 +106,30 @@ export default {
     VueNumeric
   },
   computed: {
-    queuedOrderItems() {
-      return Order.query()
-        .where('status', 'preparing')
-        .with('order_items')
-        .get()
+    queuedOrderItems () {
+      return Order.query().where('status', 'preparing').with('order_items').get()
     },
-    processedOrder() {
-      return Order.query()
-        .where('status', 'done')
-        .orWhere('status', 'cancelled')
-        .get()
+    processedOrder () {
+      return Order.query().where('status', 'done').orWhere('status', 'cancelled').get()
     },
-    selectedOrder() {
+    selectedOrder () {
       return this.$store.getters['cashier/selectedOrder']
     }
   },
-  data() {
+  data () {
     return {
       search: '',
       isShowOrder: false
     }
   },
-  async mounted() {
+  async mounted () {
     const {
       response: { data }
     } = await Order.api().fetch()
     Order.insertOrUpdate({ data })
   },
   methods: {
-    selectOrder(item) {
+    selectOrder (item) {
       this.$store.commit('cashier/SET_SELECTED_ORDER', item)
       this.isShowOrder = true
     }

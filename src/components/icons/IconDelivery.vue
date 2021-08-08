@@ -6,11 +6,7 @@
     viewBox="0 0 77.572 73.202"
   >
     <g id="delivery-man" transform="translate(0 -14.423)">
-      <g
-        id="Group_295"
-        data-name="Group 295"
-        transform="translate(57.879 46.822)"
-      >
+      <g id="Group_295" data-name="Group 295" transform="translate(57.879 46.822)">
         <path
           id="Path_282"
           data-name="Path 282"
@@ -20,11 +16,7 @@
           fill-rule="evenodd"
         />
       </g>
-      <g
-        id="Group_296"
-        data-name="Group 296"
-        transform="translate(57.879 36.895)"
-      >
+      <g id="Group_296" data-name="Group 296" transform="translate(57.879 36.895)">
         <path
           id="Path_283"
           data-name="Path 283"
@@ -34,11 +26,7 @@
           fill-rule="evenodd"
         />
       </g>
-      <g
-        id="Group_297"
-        data-name="Group 297"
-        transform="translate(57.879 43.519)"
-      >
+      <g id="Group_297" data-name="Group 297" transform="translate(57.879 43.519)">
         <path
           id="Path_284"
           data-name="Path 284"
@@ -48,11 +36,7 @@
           fill-rule="evenodd"
         />
       </g>
-      <g
-        id="Group_298"
-        data-name="Group 298"
-        transform="translate(70.391 36.894)"
-      >
+      <g id="Group_298" data-name="Group 298" transform="translate(70.391 36.894)">
         <path
           id="Path_285"
           data-name="Path 285"
@@ -62,11 +46,7 @@
           fill-rule="evenodd"
         />
       </g>
-      <g
-        id="Group_299"
-        data-name="Group 299"
-        transform="translate(73.462 43.519)"
-      >
+      <g id="Group_299" data-name="Group 299" transform="translate(73.462 43.519)">
         <path
           id="Path_286"
           data-name="Path 286"
@@ -76,11 +56,7 @@
           fill-rule="evenodd"
         />
       </g>
-      <g
-        id="Group_300"
-        data-name="Group 300"
-        transform="translate(70.391 48.349)"
-      >
+      <g id="Group_300" data-name="Group 300" transform="translate(70.391 48.349)">
         <path
           id="Path_287"
           data-name="Path 287"
@@ -90,11 +66,7 @@
           fill-rule="evenodd"
         />
       </g>
-      <g
-        id="Group_301"
-        data-name="Group 301"
-        transform="translate(34.449 56.736)"
-      >
+      <g id="Group_301" data-name="Group 301" transform="translate(34.449 56.736)">
         <path
           id="Path_288"
           data-name="Path 288"
@@ -104,11 +76,7 @@
           fill-rule="evenodd"
         />
       </g>
-      <g
-        id="Group_302"
-        data-name="Group 302"
-        transform="translate(21.609 63.037)"
-      >
+      <g id="Group_302" data-name="Group 302" transform="translate(21.609 63.037)">
         <path
           id="Path_289"
           data-name="Path 289"
@@ -118,11 +86,7 @@
           fill-rule="evenodd"
         />
       </g>
-      <g
-        id="Group_303"
-        data-name="Group 303"
-        transform="translate(35.805 29.719)"
-      >
+      <g id="Group_303" data-name="Group 303" transform="translate(35.805 29.719)">
         <path
           id="Path_290"
           data-name="Path 290"
@@ -132,11 +96,7 @@
           fill-rule="evenodd"
         />
       </g>
-      <g
-        id="Group_304"
-        data-name="Group 304"
-        transform="translate(31.568 51.949)"
-      >
+      <g id="Group_304" data-name="Group 304" transform="translate(31.568 51.949)">
         <path
           id="Path_291"
           data-name="Path 291"
@@ -146,11 +106,7 @@
           fill-rule="evenodd"
         />
       </g>
-      <g
-        id="Group_305"
-        data-name="Group 305"
-        transform="translate(39.801 31.24)"
-      >
+      <g id="Group_305" data-name="Group 305" transform="translate(39.801 31.24)">
         <path
           id="Path_292"
           data-name="Path 292"
@@ -160,11 +116,7 @@
           fill-rule="evenodd"
         />
       </g>
-      <g
-        id="Group_306"
-        data-name="Group 306"
-        transform="translate(43.425 51.949)"
-      >
+      <g id="Group_306" data-name="Group 306" transform="translate(43.425 51.949)">
         <path
           id="Path_293"
           data-name="Path 293"
@@ -174,11 +126,7 @@
           fill-rule="evenodd"
         />
       </g>
-      <g
-        id="Group_307"
-        data-name="Group 307"
-        transform="translate(44.615 67.323)"
-      >
+      <g id="Group_307" data-name="Group 307" transform="translate(44.615 67.323)">
         <path
           id="Path_294"
           data-name="Path 294"
@@ -188,11 +136,7 @@
           fill-rule="evenodd"
         />
       </g>
-      <g
-        id="Group_308"
-        data-name="Group 308"
-        transform="translate(47.531 79.088)"
-      >
+      <g id="Group_308" data-name="Group 308" transform="translate(47.531 79.088)">
         <path
           id="Path_295"
           data-name="Path 295"
@@ -202,11 +146,7 @@
           fill-rule="evenodd"
         />
       </g>
-      <g
-        id="Group_309"
-        data-name="Group 309"
-        transform="translate(2.525 77.206)"
-      >
+      <g id="Group_309" data-name="Group 309" transform="translate(2.525 77.206)">
         <path
           id="Path_296"
           data-name="Path 296"
@@ -226,11 +166,7 @@
           fill-rule="evenodd"
         />
       </g>
-      <g
-        id="Group_311"
-        data-name="Group 311"
-        transform="translate(11.34 45.936)"
-      >
+      <g id="Group_311" data-name="Group 311" transform="translate(11.34 45.936)">
         <path
           id="Path_298"
           data-name="Path 298"
@@ -240,11 +176,7 @@
           fill-rule="evenodd"
         />
       </g>
-      <g
-        id="Group_312"
-        data-name="Group 312"
-        transform="translate(29.86 21.849)"
-      >
+      <g id="Group_312" data-name="Group 312" transform="translate(29.86 21.849)">
         <path
           id="Path_299"
           data-name="Path 299"
@@ -254,11 +186,7 @@
           fill-rule="evenodd"
         />
       </g>
-      <g
-        id="Group_313"
-        data-name="Group 313"
-        transform="translate(28.006 14.423)"
-      >
+      <g id="Group_313" data-name="Group 313" transform="translate(28.006 14.423)">
         <path
           id="Path_300"
           data-name="Path 300"
@@ -268,11 +196,7 @@
           fill-rule="evenodd"
         />
       </g>
-      <g
-        id="Group_314"
-        data-name="Group 314"
-        transform="translate(32.183 14.423)"
-      >
+      <g id="Group_314" data-name="Group 314" transform="translate(32.183 14.423)">
         <path
           id="Path_301"
           data-name="Path 301"
@@ -282,11 +206,7 @@
           fill-rule="evenodd"
         />
       </g>
-      <g
-        id="Group_315"
-        data-name="Group 315"
-        transform="translate(27.47 68.625)"
-      >
+      <g id="Group_315" data-name="Group 315" transform="translate(27.47 68.625)">
         <path
           id="Path_302"
           data-name="Path 302"
@@ -296,11 +216,7 @@
           fill-rule="evenodd"
         />
       </g>
-      <g
-        id="Group_316"
-        data-name="Group 316"
-        transform="translate(17.547 47.172)"
-      >
+      <g id="Group_316" data-name="Group 316" transform="translate(17.547 47.172)">
         <path
           id="Path_303"
           data-name="Path 303"
@@ -310,11 +226,7 @@
           fill-rule="evenodd"
         />
       </g>
-      <g
-        id="Group_317"
-        data-name="Group 317"
-        transform="translate(8.446 68.356)"
-      >
+      <g id="Group_317" data-name="Group 317" transform="translate(8.446 68.356)">
         <path
           id="Path_304"
           data-name="Path 304"
@@ -324,11 +236,7 @@
           fill-rule="evenodd"
         />
       </g>
-      <g
-        id="Group_318"
-        data-name="Group 318"
-        transform="translate(38.195 63.037)"
-      >
+      <g id="Group_318" data-name="Group 318" transform="translate(38.195 63.037)">
         <path
           id="Path_305"
           data-name="Path 305"
@@ -338,11 +246,7 @@
           fill-rule="evenodd"
         />
       </g>
-      <g
-        id="Group_319"
-        data-name="Group 319"
-        transform="translate(53.663 67.323)"
-      >
+      <g id="Group_319" data-name="Group 319" transform="translate(53.663 67.323)">
         <path
           id="Path_306"
           data-name="Path 306"
@@ -352,11 +256,7 @@
           fill-rule="evenodd"
         />
       </g>
-      <g
-        id="Group_320"
-        data-name="Group 320"
-        transform="translate(2.524 77.206)"
-      >
+      <g id="Group_320" data-name="Group 320" transform="translate(2.524 77.206)">
         <path
           id="Path_307"
           data-name="Path 307"
@@ -366,11 +266,7 @@
           fill-rule="evenodd"
         />
       </g>
-      <g
-        id="Group_321"
-        data-name="Group 321"
-        transform="translate(47.531 79.088)"
-      >
+      <g id="Group_321" data-name="Group 321" transform="translate(47.531 79.088)">
         <path
           id="Path_308"
           data-name="Path 308"
@@ -380,11 +276,7 @@
           fill-rule="evenodd"
         />
       </g>
-      <g
-        id="Group_322"
-        data-name="Group 322"
-        transform="translate(59.512 56.736)"
-      >
+      <g id="Group_322" data-name="Group 322" transform="translate(59.512 56.736)">
         <path
           id="Path_309"
           data-name="Path 309"
@@ -394,11 +286,7 @@
           fill-rule="evenodd"
         />
       </g>
-      <g
-        id="Group_323"
-        data-name="Group 323"
-        transform="translate(29.895 23.38)"
-      >
+      <g id="Group_323" data-name="Group 323" transform="translate(29.895 23.38)">
         <path
           id="Path_310"
           data-name="Path 310"
@@ -408,11 +296,7 @@
           fill-rule="evenodd"
         />
       </g>
-      <g
-        id="Group_324"
-        data-name="Group 324"
-        transform="translate(14.521 40.198)"
-      >
+      <g id="Group_324" data-name="Group 324" transform="translate(14.521 40.198)">
         <path
           id="Path_311"
           data-name="Path 311"
@@ -422,11 +306,7 @@
           fill-rule="evenodd"
         />
       </g>
-      <g
-        id="Group_325"
-        data-name="Group 325"
-        transform="translate(22.473 42.916)"
-      >
+      <g id="Group_325" data-name="Group 325" transform="translate(22.473 42.916)">
         <path
           id="Path_312"
           data-name="Path 312"
@@ -436,11 +316,7 @@
           fill-rule="evenodd"
         />
       </g>
-      <g
-        id="Group_326"
-        data-name="Group 326"
-        transform="translate(28.329 37.384)"
-      >
+      <g id="Group_326" data-name="Group 326" transform="translate(28.329 37.384)">
         <path
           id="Path_313"
           data-name="Path 313"
@@ -450,11 +326,7 @@
           fill-rule="evenodd"
         />
       </g>
-      <g
-        id="Group_327"
-        data-name="Group 327"
-        transform="translate(22.472 45.073)"
-      >
+      <g id="Group_327" data-name="Group 327" transform="translate(22.472 45.073)">
         <path
           id="Path_314"
           data-name="Path 314"
@@ -464,11 +336,7 @@
           fill-rule="evenodd"
         />
       </g>
-      <g
-        id="Group_328"
-        data-name="Group 328"
-        transform="translate(28.329 37.895)"
-      >
+      <g id="Group_328" data-name="Group 328" transform="translate(28.329 37.895)">
         <path
           id="Path_315"
           data-name="Path 315"
@@ -478,11 +346,7 @@
           fill-rule="evenodd"
         />
       </g>
-      <g
-        id="Group_329"
-        data-name="Group 329"
-        transform="translate(19.877 42.128)"
-      >
+      <g id="Group_329" data-name="Group 329" transform="translate(19.877 42.128)">
         <path
           id="Path_316"
           data-name="Path 316"

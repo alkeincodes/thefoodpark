@@ -1,10 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import {
-  addGuardstoRoutes,
-  addCashierGuardToRoutes,
-  addAdminGuardToRoutes
-} from './guards'
+import { addGuardstoRoutes, addCashierGuardToRoutes, addAdminGuardToRoutes } from './guards'
 // import store from '@/store'
 import cashier from '@/modules/Cashier/cashier.routes'
 import admin from '@/modules/Admin/admin.routes'

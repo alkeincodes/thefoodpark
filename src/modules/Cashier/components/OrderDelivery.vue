@@ -51,7 +51,7 @@ import TableResizeMixin from '@/utils/table.mixin'
 export default {
   name: 'OrderDelivery',
   mixins: [TableResizeMixin],
-  data() {
+  data () {
     return {
       data: [
         {
@@ -89,7 +89,7 @@ export default {
       ]
     }
   },
-  created() {
+  created () {
     this.$nextTick(() => {
       this.resizeTableRow()
     })

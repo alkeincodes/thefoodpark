@@ -9,7 +9,7 @@
 <script>
 export default {
   name: 'App',
-  mounted() {
+  mounted () {
     console.log('@VUE_APP_API_URL: ', process.env.VUE_APP_API_URL)
 
     // this is to set the prefix of the order number
