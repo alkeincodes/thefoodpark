@@ -88,10 +88,7 @@ export default {
       })
         .then(async () => {
           item.status = 'cancelled'
-          const {
-            response: { data }
-          } = await Order.api().updateOrder(item)
-          Order.insertOrUpdate(data)
+          await Order.api().updateOrder(item)
           this.$message({
             type: 'success',
             message: 'Order cancelled successfully!'

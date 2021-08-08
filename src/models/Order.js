@@ -18,7 +18,7 @@ export default class Order extends Base {
         return this.post('', params)
       },
       updateOrder (params) {
-        return this.put(`/orders/${params.id}`, params)
+        return this.put(`/${params.id}`, params)
       }
     }
   }

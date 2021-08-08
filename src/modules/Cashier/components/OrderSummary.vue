@@ -2,18 +2,20 @@
   <div class="order-summary">
     <div class="order-summary__top">
       <h3 class="mb-4">Order Summary</h3>
-      <el-radio-group v-model="orderType">
+      <el-radio-group v-model="orderType" class="mb-4">
         <el-radio label="dine-in">Dine-in</el-radio>
         <el-radio label="takeout">Takeout</el-radio>
         <el-radio label="delivery">Delivery</el-radio>
       </el-radio-group>
-      <el-input
-        v-model="tableNumber"
-        class="table-number mt-4"
-        placeholder="Table Number"
-        type="number"
-      />
-      <p class="text-hint mt-1 mb-4">Automatically prefix with 'Table'</p>
+      <template v-if="orderType === 'dine-in'">
+        <el-input
+          v-model="tableNumber"
+          class="table-number mt-4"
+          placeholder="Table Number"
+          type="number"
+        />
+        <p class="text-hint mt-1 mb-4">Automatically prefix with 'Table'</p>
+      </template>
       <el-table :data="orderedItems" style="width: 100%">
         <el-table-column prop="name" label="Name"> </el-table-column>
         <el-table-column label="Price">
@@ -101,7 +103,7 @@
         <el-button type="danger" plain @click="cancelOrder">CANCEL</el-button>
         <el-button
           type="primary"
-          :disabled="receivedCash <= 0 || !tableNumber || orderedItems.length == 0"
+          :disabled="receivedCash <= 0 || (!tableNumber && orderType === 'dine-in') || orderedItems.length == 0"
           @click="checkout"
           >CHECKOUT</el-button
         >
@@ -178,15 +180,13 @@ export default {
               table_number: this.tableNumber
             }
 
-            const {
-              response: { data }
-            } = await Order.api().createOrder(order)
-            Order.insertOrUpdate(data)
+            await Order.api().createOrder(order)
+            // Order.insertOrUpdate(data)
 
             // update order counter
             localStorage.setItem('order_counter', newOrderCounter)
 
-            this.$router.push({ name: 'Home' })
+            this.$router.push({ name: 'cashier' })
             this.$store.commit('cashier/CLEAR_ORDERED_ITEMS')
 
             this.$message({

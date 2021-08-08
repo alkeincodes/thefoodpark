@@ -25,16 +25,16 @@ export default [
         meta: {
           isHidden: true
         }
-      },
-      {
-        path: 'settings',
-        name: 'Settings',
-        component: Index,
-        meta: {
-          icon: 'gear',
-          navName: 'Settings'
-        }
       }
+      // {
+      //   path: 'settings',
+      //   name: 'Settings',
+      //   component: Index,
+      //   meta: {
+      //     icon: 'gear',
+      //     navName: 'Settings'
+      //   }
+      // }
     ]
   }
 ]
