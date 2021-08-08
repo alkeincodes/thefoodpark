@@ -7,15 +7,27 @@
       :model="ruleForm"
       :rules="rules"
     >
-      <el-form-item label="Category Name" prop="name">
+      <el-form-item label="Name" prop="name">
         <el-input v-model="ruleForm.name" />
       </el-form-item>
-      <el-form-item label="Category Description" prop="description">
+      <el-form-item label="Description" prop="description">
         <el-input v-model="ruleForm.description" />
       </el-form-item>
       <el-form-item>
-        <el-button @click="$emit('cancel')">Cancel</el-button>
-        <el-button type="primary" :loading="isSaving" @click="createCategory">Confirm</el-button>
+        <el-button
+          type="danger"
+          @click="$emit('cancel')"
+          plain
+        >
+          Cancel
+        </el-button>
+        <el-button
+          type="primary"
+          :loading="isSaving"
+          @click="saveCategory"
+        >
+          Confirm
+        </el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -49,7 +61,7 @@ export default {
     toEditCategory: {
       handler (val) {
         if (val) {
-          this.ruleForm = val
+          this.ruleForm = JSON.parse(JSON.stringify(val))
         }
       },
       deep: true,
@@ -58,7 +70,7 @@ export default {
     // watch modalAction value and assign the correct data value
     modalAction (val) {
       if (val === 'edit') {
-        this.ruleForm = this.toEditMenu
+        this.ruleForm = JSON.parse(JSON.stringify(this.toEditCategory))
       } else {
         this.resetForm()
       }
@@ -84,15 +96,24 @@ export default {
     }
   },
   methods: {
-    createCategory () {
+    saveCategory () {
       this.isSaving = true
       this.$refs.ruleForm.validate(async (valid) => {
         if (valid) {
           try {
-            this.$message({
-              type: 'success',
-              message: 'Category created successfully!'
-            })
+            if (this.modalAction === 'create') {
+              await Category.api().createCategory(this.ruleForm)
+              this.$message({
+                type: 'success',
+                message: 'Category created successfully!'
+              })
+            } else {
+              await Category.api().updateCategory(this.ruleForm)
+              this.$message({
+                type: 'success',
+                message: 'Category updated successfully!'
+              })
+            }
             this.resetForm()
             this.$emit('success')
           } catch (e) {

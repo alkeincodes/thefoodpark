@@ -1,18 +1,24 @@
 <template>
   <div class="categories">
     <h1 class="mb-4">Categories</h1>
-    <el-button type="primary">Create New Category</el-button>
+    <el-button
+      type="primary"
+      icon="el-icon-plus"
+      @click="openModal('create')"
+    >
+      Create New Category
+    </el-button>
 
     <el-table :data="categories" class="mt-4" style="width: 100%">
-      <el-table-column prop="name" label="Name" width="180"> </el-table-column>
-      <el-table-column prop="description" label="Desription" width="180"> </el-table-column>
+      <el-table-column prop="name" label="Name" width="180"></el-table-column>
+      <el-table-column prop="description" label="Desription"></el-table-column>
       <el-table-column label="Actions">
         <template slot-scope="props">
           <el-button
             type="primary"
             size="mini"
             icon="el-icon-edit"
-            @click="openEditModal(props.row)"
+            @click="openModal('edit', props.row)"
             circle
             plain
           />
@@ -47,7 +53,8 @@ export default {
   components: { CreateEdit },
   data () {
     return {
-      showModal: false
+      showModal: false,
+      modalAction: 'create'
     }
   },
   computed: {
@@ -59,11 +66,36 @@ export default {
     await Category.api().fetch()
   },
   methods: {
-    openEditModal () {
-      return null
+    openModal (action, item = null) {
+      this.modalAction = action
+
+      if (item) {
+        this.$store.commit('admin/SET_SELECTED_CATEGORY', item)
+      }
+
+      this.showModal = !this.showModal
     },
-    deleteCategory () {
-      return ''
+    deleteCategory (item) {
+      this.$confirm(`Are you sure you want to delete "${item.name}"`, 'Warning', {
+        confirmButtonText: 'Yes',
+        cancelButtonText: 'No',
+        type: 'warning'
+      }).then(async () => {
+        try {
+          await Category.api().deleteCategory(item)
+          Category.delete(item.id)
+          this.$message({
+            type: 'success',
+            message: 'Category deleted successfully!'
+          })
+        } catch (e) {
+          console.log(e.response.data)
+          this.$message({
+            type: 'danger',
+            message: 'Something went wrong!'
+          })
+        }
+      })
     }
   }
 }

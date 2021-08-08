@@ -13,6 +13,15 @@ export default class Category extends Base {
         dataTransformer: (response) => {
           return response.data || []
         }
+      },
+      createCategory (params) {
+        return this.post('', params)
+      },
+      updateCategory (params) {
+        return this.put(`/${params.id}`, params)
+      },
+      deleteCategory (params) {
+        return this.delete(`/${params.id}`, params)
       }
     }
   }

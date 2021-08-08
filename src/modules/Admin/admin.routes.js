@@ -65,6 +65,7 @@ export default [
         name: 'Categories',
         component: Category,
         meta: {
+          icon: 'menu',
           navName: 'Categories'
         }
       }
