@@ -7,12 +7,11 @@
         <el-radio label="takeout">Takeout</el-radio>
         <el-radio label="delivery">Delivery</el-radio>
       </el-radio-group>
-      <template v-if="orderType === 'dine-in'">
+      <template>
         <el-input
           v-model="tableNumber"
           class="table-number mt-4"
           placeholder="Table Number"
-          type="number"
         />
         <p class="text-hint mt-1 mb-4">Automatically prefix with 'Table'</p>
       </template>
@@ -93,7 +92,7 @@
               read-only
             />
           </h1>
-          <p class="text-hint" v-if="cashChange > 0">
+          <p class="total-change" v-if="cashChange > 0">
             Change:
             <vue-numeric :value="cashChange" currency="₱" separator="," :precision="2" read-only />
           </p>
@@ -162,6 +161,7 @@ export default {
       const pad = '0000'
       const padNumber = pad.substring(0, pad.length - str.length) + str
       console.log(padNumber)
+      this.$store.commit('cashier/SET_SEARCH_MENU', '')
       if (this.receivedCash >= this.overAllTotal) {
         this.$confirm('Are you sure?', 'Warning', {
           confirmButtonText: 'Yes',
@@ -210,7 +210,7 @@ export default {
     },
     cancelOrder () {
       this.$store.commit('cashier/CLEAR_ORDERED_ITEMS')
-      this.$router.push({ name: 'Home' })
+      this.$router.push('/cashier/')
     }
   }
 }

@@ -12,6 +12,9 @@ export default class OrderItem extends Base {
         dataTransformer: (response) => {
           return response.data || []
         }
+      },
+      updateItem (params) {
+        return this.put(`/${params.id}`, params)
       }
     }
   }
@@ -23,6 +26,7 @@ export default class OrderItem extends Base {
       order_id: this.attr(null),
       price: this.attr(null),
       quantity: this.attr(null),
+      status: this.attr(null),
       ...super.fields()
     }
   }

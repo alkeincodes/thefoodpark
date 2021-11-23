@@ -8,7 +8,9 @@
         :key="item.id"
         @click="$emit('select-item', item)"
       >
-        <h1 class="mt-2">{{ item.order_number }}</h1>
+        <h1 v-if="item.table_number">#{{ item.table_number }}</h1>
+        <h1 class="mb-2" v-else>TakeOut</h1>
+        <h5>{{ moment(item.created_at).format('h:mm a') }}</h5>
         <component :is="`icon-${item.type}`" />
         <div class="price">
           <span class="txt-hint">Total Price:</span>
@@ -40,6 +42,7 @@
 <script>
 import VueNumeric from 'vue-numeric'
 import Order from '@/models/Order'
+import moment from 'moment'
 
 export default {
   name: 'OrderQueue',
@@ -61,6 +64,7 @@ export default {
     console.log('items: ', this.items)
   },
   methods: {
+    moment,
     setOrderDone (item) {
       this.$confirm('Are you sure this order is done?', 'Warning', {
         confirmButtonText: 'Yes',

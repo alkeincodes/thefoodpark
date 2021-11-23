@@ -28,7 +28,11 @@
         @click="$router.push({ name: 'NewOrder' })"
         >New Order</el-button
       >
-      <order-list v-if="processedOrder.length" :items="processedOrder" />
+      <order-list
+        v-if="processedOrder.length"
+        :items="processedOrder"
+        @select-item="selectOrder"
+      />
       <order-queue
         v-if="queuedOrderItems.length"
         :items="queuedOrderItems"
@@ -38,11 +42,13 @@
 
       <!-- SHOW ORDER -->
       <el-dialog
-        :title="`Selected Order: ${selectedOrder.order_number}`"
+        title="Selected Order"
         :visible.sync="isShowOrder"
       >
-        <h1 class="mb-2">Order Number: {{ selectedOrder.order_number }}</h1>
-        <h2 class="mb-2">Table Number: {{ selectedOrder.table_number }}</h2>
+
+        <h2 class="mb-2" v-if="selectedOrder.table_number">Table Number: #{{ selectedOrder.table_number }}</h2>
+        <h2 class="mb-2" v-else>Order Type: TakeOut</h2>
+        <h3 class="mb-2">Time of Order: {{ moment(selectedOrder.created_at).format('h:mm a') }}</h3>
         <h3 class="mb-2">
           Total Price:
           <vue-numeric
@@ -77,6 +83,11 @@
             </template>
           </el-table-column>
           <el-table-column label="Quantity" prop="quantity"></el-table-column>
+          <el-table-column label="Status">
+            <template slot-scope="props">
+              <el-checkbox v-model="props.row.status" @change="updateItemStatus(props.row, $event)"></el-checkbox>
+            </template>
+          </el-table-column>
         </el-table>
       </el-dialog>
     </div>
@@ -93,7 +104,8 @@ import OrderQueue from '@/modules/Cashier/components/OrderQueue'
 import VueNumeric from 'vue-numeric'
 
 import Order from '@/models/Order'
-// import OrderItem from '@/models/OrderItem'
+import OrderItem from '@/models/OrderItem'
+import moment from 'moment'
 
 export default {
   name: 'Home',
@@ -110,7 +122,7 @@ export default {
       return Order.query().where('status', 'preparing').with('order_items').get()
     },
     processedOrder () {
-      return Order.query().where('status', 'done').orWhere('status', 'cancelled').get()
+      return Order.query().where('status', 'done').orWhere('status', 'cancelled').with('order_items').get()
     },
     selectedOrder () {
       return this.$store.getters['cashier/selectedOrder']
@@ -129,9 +141,20 @@ export default {
     Order.insertOrUpdate({ data })
   },
   methods: {
+    moment,
     selectOrder (item) {
+      console.log('select: ', item)
       this.$store.commit('cashier/SET_SELECTED_ORDER', item)
       this.isShowOrder = true
+    },
+    async updateItemStatus (item) {
+      const { response: { data } } = await OrderItem.api().updateItem(item)
+      console.log('res: ', data)
+      OrderItem.insertOrUpdate({ data })
+      this.$message({
+        type: 'success',
+        message: 'Order updated successfully!'
+      })
     }
   }
 }

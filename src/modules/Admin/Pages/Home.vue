@@ -9,20 +9,32 @@
         </el-card>
       </el-col>
     </el-row>
+    <h1 style="margin-top: 25px;">Total Income: <vue-numeric :value="totalIncome" currency="₱" separator="," :precision="2" read-only /></h1>
   </div>
 </template>
 
 <script>
+import VueNumeric from 'vue-numeric'
+
 export default {
   name: 'AdminHome',
+  components: { VueNumeric },
   data () {
     return {
-      orders: []
+      orders: [],
+      totalIncome: 0
     }
   },
   created () {
     this.axios.get('/admin/orders-by-food').then(({ data }) => {
       this.orders = data
+      console.log('dataa: ', data)
+
+      this.totalIncome = this.orders.reduce((total, order) => {
+        return total + (order.price * +order.total)
+      }, 0)
+
+      console.log('totalIncome', this.totalIncome)
     })
   }
 }
