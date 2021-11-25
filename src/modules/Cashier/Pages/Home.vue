@@ -85,7 +85,17 @@
           <el-table-column label="Quantity" prop="quantity"></el-table-column>
           <el-table-column label="Status">
             <template slot-scope="props">
-              <el-checkbox v-model="props.row.status" @change="updateItemStatus(props.row, $event)"></el-checkbox>
+              <el-checkbox
+                v-model="props.row.status"
+                @change="updateItemStatus(props.row, $event)"
+                :true-label="1"
+                :false-label="0"
+              />
+            </template>
+          </el-table-column>
+          <el-table-column label="Action">
+            <template slot-scope="props">
+              <el-button type="danger" @click="deleteItem(props.row.id)" round><i class="el-icon-delete"></i></el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -155,6 +165,21 @@ export default {
         type: 'success',
         message: 'Order updated successfully!'
       })
+    },
+    async deleteItem (id) {
+      
+
+      this.$confirm('This will permanently delete the file. Continue?', 'Warning', {
+        confirmButtonText: 'OK',
+        cancelButtonText: 'Cancel',
+        type: 'warning'
+      }).then(() => {
+        await OrderItem.delete(id)
+        this.$message({
+          type: 'success',
+          message: 'Order Item deleted successfully!'
+        })
+      })      
     }
   }
 }
