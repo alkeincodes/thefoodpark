@@ -173,7 +173,7 @@ export default {
         confirmButtonText: 'OK',
         cancelButtonText: 'Cancel',
         type: 'warning'
-      }).then(() => {
+      }).then(async () => {
         await OrderItem.delete(id)
         this.$message({
           type: 'success',
