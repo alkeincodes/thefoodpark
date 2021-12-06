@@ -167,8 +167,6 @@ export default {
       })
     },
     async deleteItem (id) {
-      
-
       this.$confirm('This will permanently delete the file. Continue?', 'Warning', {
         confirmButtonText: 'OK',
         cancelButtonText: 'Cancel',
@@ -179,7 +177,7 @@ export default {
           type: 'success',
           message: 'Order Item deleted successfully!'
         })
-      })      
+      })
     }
   }
 }

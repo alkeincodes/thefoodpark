@@ -6,6 +6,7 @@
         <el-card class="box-card">
           <h1 class="text--success">{{ item.total }}</h1>
           <h5 class="mt-4">{{ item.name }}</h5>
+          <vue-numeric :value="item.total * item.price" currency="₱" separator="," :precision="2" read-only />
         </el-card>
       </el-col>
     </el-row>
